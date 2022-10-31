@@ -5,7 +5,12 @@ FROM python:3.9.6-alpine
 WORKDIR /usr/src/app
 
 # set environment variables
+
+# disables an automatic check for pip updates each time
+ENV PIP_DISABLE_PIP_VERSION_CHECK 1
+# means Python will not try to write .pyc files
 ENV PYTHONDONTWRITEBYTECODE 1
+# ensures our console output is not buffered by Docker
 ENV PYTHONUNBUFFERED 1
 
 # install psycopg2 dependencies
@@ -26,4 +31,4 @@ RUN chmod +x /usr/src/app/entrypoint.sh
 COPY . .
 
 # run entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+ENTRYPOINT ["sh","/usr/src/app/entrypoint.sh"]
