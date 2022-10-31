@@ -1,0 +1,44 @@
+version: "2.1"
+services:
+  syslog-ng:
+    image: lscr.io/linuxserver/syslog-ng:latest
+    container_name: syslog-server
+    environment:
+      - TZ=Europe/London
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /config:/config
+      - syslog-data-volume:/var/log 
+      - /test-data:/var/log
+    ports:
+      - 514:5514/udp
+      - 601:6601/tcp
+      - 6514:6514/tcp
+    restart: unless-stopped
+
+  web:
+    build: ./App
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./App/:/usr/src/App/
+      - syslog-data-volume:/var
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
+      - POSTGRES_DB=hello_django_dev
+
+
+volumes:
+  syslog-data-volume:
+
