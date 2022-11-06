@@ -1,5 +1,3 @@
 Syslog/log
-Syslog/syslog-ng.conf
-Syslog/syslog-ng.ctl
-Syslog/syslog-ng.persist
-Syslog/syslog-ng.pid
+Syslog/config
+.DS_Store
