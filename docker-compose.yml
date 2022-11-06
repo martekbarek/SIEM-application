@@ -1,45 +1,53 @@
 version: "3.1"
 services:
-  syslog-ng:
-    image: lscr.io/linuxserver/syslog-ng:latest
-    container_name: syslog-server
-    environment:
-      - TZ=Europe/London
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - ./Syslog:/config
-      - syslog-data-volume:/var/log 
-      # - /test-data:/var/log
-    ports:
-      - 514:5514/udp
-      - 601:6601/tcp
-      - 6514:6514/tcp
-    restart: unless-stopped
+  server:
+    build: ./Server
+    expose:
+      - 51401
+    links:
+      - "client"
+    tty: true
+    networks:
+      lil-network:
+        ipv4_address: 172.23.0.3
 
-  web:
-    build: ./App
-    command: python speedy7/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./App/:/usr/src/App/
-      - syslog-data-volume:/var/log
-    ports:
-      - 8000:8000
-    env_file:
-      - ./App/.env.dev
-    depends_on:
-      - db
-  db:
-    restart: always
-    image: postgres:13
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-     - POSTGRES_USER=hello_django
-     - POSTGRES_PASSWORD=hello_django
-     - POSTGRES_DB=hello_django_dev
-    ports:
-      - 5432:5432
+  client:
+    build: ./Client
+    tty: true
+    networks:
+      lil-network:
+        ipv4_address: 172.23.0.2
+    
+networks:
+  lil-network:
+    ipam:
+      config:
+        - subnet: 172.23.0.0/16
+
+    
+  # web:
+  #   build: ./App
+  #   command: python speedy7/manage.py runserver 0.0.0.0:8000
+  #   volumes:
+  #     - ./App/:/usr/src/App/
+  #     # - syslog-data-volume:/syslog-data
+  #   ports:
+  #     - 8000:8000
+  #   env_file:
+  #     - ./App/.env.dev
+  #   depends_on:
+  #     - db
+  # db:
+  #   restart: always
+  #   image: postgres:13
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data/
+  #   environment:
+  #    - POSTGRES_USER=hello_django
+  #    - POSTGRES_PASSWORD=hello_django
+  #    - POSTGRES_DB=hello_django_dev
+  #   ports:
+  #     - 5432:5432
 
   # pgadmin:
   #   image: dpage/pgadmin4
@@ -54,7 +62,7 @@ services:
   #   restart: always
 
 
-volumes:
-  syslog-data-volume:
-  postgres_data:
+# volumes:
+#   # syslog-data-volume:
+#   postgres_data:
 
