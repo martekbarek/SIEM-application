@@ -3,7 +3,7 @@ services:
   server:
     build: ./Server
     expose:
-      - 51401
+      - 514
     links:
       - "client"
     tty: true
