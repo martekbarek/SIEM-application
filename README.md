@@ -11,7 +11,7 @@ lsof -i
 # track service
 strace <service>
 # test message
-logger -p local0.info --server 127.0.0.1 --tcp --port 51401 "Test message"
+logger -p local0.info --server 127.0.0.1 --tcp --port 514 "Test message"
 # list proccesses
 ps -aux | grep -i syslog
 # attach to db
