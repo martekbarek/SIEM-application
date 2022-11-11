@@ -14,4 +14,12 @@ strace <service>
 logger -p local0.info --server 127.0.0.1 --tcp --port 51401 "Test message"
 # list proccesses
 ps -aux | grep -i syslog
+# attach to db
+psql -h localhost -p 5432 -U syslog
+# conntect to db
+\c syslog
+# show tables
+\dt
+# show record
+select * from messages_ubuntu_client
 ```
