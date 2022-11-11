@@ -13,7 +13,7 @@ RUN sudo mkdir /var/log/syslog-ng && sudo chown syslog:syslog /var/log/syslog-ng
 RUN chown syslog:syslog /etc/syslog-ng/ /var/lib/syslog-ng/ /dev/ && sed -i "1s/.*/@version: 3.35/" /etc/syslog-ng/syslog-ng.conf
 
 # Consider adding the log directly to the database
-# RUN apt-get install -y libdbd-mysql libdbd-pgsql libdbd-sqlite3
+RUN apt-get install -y libdbd-pgsql
 
 # Add syslog configuration to working directory
 ADD ./server.conf /server.conf

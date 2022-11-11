@@ -1,0 +1,9 @@
+-- CREATE TABLE IF NOT EXISTS syslog (
+-- 	log_id serial PRIMARY KEY,
+--     datetime varchar(16),
+--     host varchar(32),
+--     program varchar(20),
+--     message varchar(255) 
+-- );
+--  datetime varchar(16) NOT NULL,
+--  host varchar(32) UNIQUE NOT NULL,
