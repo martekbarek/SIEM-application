@@ -13,6 +13,7 @@ fi
 
 python speedy7/manage.py flush --no-input
 python speedy7/manage.py makemigrations
-python speedy7/manage.py migrate
+# fake migrations for already created tables
+python speedy7/manage.py migrate --fake-initial
 
 exec "$@"
