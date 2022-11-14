@@ -3,6 +3,14 @@
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
+## App development preparations:
+
+1. Comment 32 line in App/speedy7/settings.py
+2. Activate your previously created virtual environment 
+```bash
+source venv/bin/activate
+```
+
 ## Helpful commands:
 
 ```bash
@@ -22,9 +30,11 @@ psql -h localhost -p 5432 -U syslog
 \dt
 # show record
 select * from messages_ubuntu_client
-# prep env to develop an app
+# Create virtual environment
 python -m venv venv
 echo venv/ >> .gitignore
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+
+
