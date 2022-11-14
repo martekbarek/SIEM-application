@@ -1,28 +1,28 @@
 version: "3.7"
 services:
-  # server:
-  #   build: ./Server
-  #   hostname: syslog-server
-  #   container_name: syslog-server
-  #   expose:
-  #     - 514
-  #   links:
-  #     - "client"
-  #   tty: true
-  #   networks:
-  #     lil-network:
-  #       ipv4_address: 172.23.0.3
-  #   depends_on:
-  #     - db
+  server:
+    build: ./Server
+    hostname: syslog-server
+    container_name: syslog-server
+    expose:
+      - 514
+    links:
+      - "client"
+    tty: true
+    networks:
+      lil-network:
+        ipv4_address: 172.23.0.3
+    depends_on:
+      - db
 
-  # client:
-  #   build: ./Client
-  #   hostname: ubuntu-client
-  #   container_name: ubuntu-client
-  #   tty: true
-  #   networks:
-  #     lil-network:
-  #       ipv4_address: 172.23.0.2
+  client:
+    build: ./Client
+    hostname: ubuntu-client
+    container_name: ubuntu-client
+    tty: true
+    networks:
+      lil-network:
+        ipv4_address: 172.23.0.2
 
   db:
     restart: always
