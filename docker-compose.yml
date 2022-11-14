@@ -1,28 +1,28 @@
 version: "3.7"
 services:
-  server:
-    build: ./Server
-    hostname: syslog-server
-    container_name: syslog-server
-    expose:
-      - 514
-    links:
-      - "client"
-    tty: true
-    networks:
-      lil-network:
-        ipv4_address: 172.23.0.3
-    depends_on:
-      - db
+  # server:
+  #   build: ./Server
+  #   hostname: syslog-server
+  #   container_name: syslog-server
+  #   expose:
+  #     - 514
+  #   links:
+  #     - "client"
+  #   tty: true
+  #   networks:
+  #     lil-network:
+  #       ipv4_address: 172.23.0.3
+  #   depends_on:
+  #     - db
 
-  client:
-    build: ./Client
-    hostname: ubuntu-client
-    container_name: ubuntu-client
-    tty: true
-    networks:
-      lil-network:
-        ipv4_address: 172.23.0.2
+  # client:
+  #   build: ./Client
+  #   hostname: ubuntu-client
+  #   container_name: ubuntu-client
+  #   tty: true
+  #   networks:
+  #     lil-network:
+  #       ipv4_address: 172.23.0.2
 
   db:
     restart: always
@@ -33,41 +33,46 @@ services:
     environment:
       - POSTGRES_USER=syslog 
       - POSTGRES_PASSWORD=syslog
-      # For now syslog creates tables automagically
-      # - POSTGRES_DB=syslog
+      - POSTGRES_DB=syslog
     volumes:
       - postgres_data:/var/lib/postgresql/data/
       # - ./Database/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
+    # ports could be just exposed to make db unaccessible from outside the container
       - 5432:5432
+    # expose:
+    # # ports could be just exposed to make db unaccessible from outside the container
+    #   - 5432
     networks:
       lil-network:
         ipv4_address: 172.23.0.4
 
-  # web:
-  #   build: ./App
-  #   command: python speedy7/manage.py runserver 0.0.0.0:8000
-  #   volumes:
-  #     - ./App/:/usr/src/App/
-  #     # - syslog-data-volume:/syslog-data
-  #   ports:
-  #     - 8000:8000
-  #   env_file:
-  #     - ./App/.env.dev
-  #   depends_on:
-  #     - db
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: demo-pgadmin
+  web:
+    build: ./App
+    command: python speedy7/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./App/:/usr/src/App/
+      # - syslog-data-volume:/syslog-data
+    ports:
+      - 8000:8000
+    env_file:
+      - ./App/.env.dev
     depends_on:
       - db
-    ports:
-      - "5051:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
-      PGADMIN_DEFAULT_PASSWORD: root
-    restart: always
+    networks:
+      lil-network:
+
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: demo-pgadmin
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - "5051:80"
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+  #     PGADMIN_DEFAULT_PASSWORD: root
+  #   restart: always
     
 networks:
   lil-network:
