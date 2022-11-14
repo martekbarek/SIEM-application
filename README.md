@@ -22,4 +22,9 @@ psql -h localhost -p 5432 -U syslog
 \dt
 # show record
 select * from messages_ubuntu_client
+# prep env to develop an app
+python -m venv venv
+echo venv/ >> .gitignore
+source venv/bin/activate
+pip install -r requirements.txt
 ```
