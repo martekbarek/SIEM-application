@@ -4,12 +4,49 @@
 {% block content %}
     {% csrf_token %}
     {% include 'speedy/menu.html' %}
-    
+  
     <div class="container">
-        {% for log in all_logs %}
-            <p>{{log.message}}</p>
-        {% endfor %}
+        <div class="Logs">
+            
+            <table class="table table-dark">
+            {% comment %} <tr class="header">
+                <th colspan="100%">logs</th>
+            </tr> {% endcomment %}
+            
+            <tr class="header2">
+                <th>PID</th>
+                <th>Message</th>
+                <th>Program</th>
+                <th>Facility</th>
+                <th>Host</th>
+                <th>Level</th>
+                <th>Timestamp</th>
+            </tr>
+           
+            {% for log in all_logs %}
+            <div class="records">
+                {% comment %} <tr class="bg-primary">...</tr>
+                <tr class="bg-success">...</tr>
+                <tr class="bg-warning">...</tr>
+                <tr class="bg-danger">...</tr>
+                <tr class="bg-info">...</tr> {% endcomment %}
+                <tr>
+                    <td>{{log.pid}}</td>
+                    <td>{{log.message}}</td>
+                    <td>{{log.program}}</td>
+                    <td>{{log.facility}}</td>
+                    <td>{{log.host}}</td>
+                    <td>{{log.level}}</td>
+                    <td>{{log.datetime}}</td>
+           
+
+                </tr>
+            </div>
+            {% endfor %}
+            </table>
+        </div>
     </div>
+    
 
 {% endblock %}
 
