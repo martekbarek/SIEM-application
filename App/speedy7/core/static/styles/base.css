@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap");
+
+body {
+    /* background-color: #4E2ECF; */
+    background-color: #1d1d42;
+    font-size: calc(0.24vh + 0.32vw + 6px);
+    min-height: 100%;
+    font-weight: 400;
+    font-family: 'Roboto Mono', monospace;
+    color: #6b6b6b;
+}
+.submenu {
+    width: 100%;
+}
+.submenu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #101024;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    border-bottom: 2px solid #49e68a;
+    box-shadow: 0 3px 8px 0 rgb(0, 0, 0);
+    /* box-shadow: 20px 20px 50px 10px pink inset; */
+}
+  
+.submenu li {
+    float: left;
+}
+
+.submenu li a {
+    display: block;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    background-color: rgba(169, 241, 74, 0.322);
+    transform: scale(1.1) translate(0.12rem, 0rem);
+    transition: 0.3s;
+}
+
+.active {
+    background-color: #04AA6D;
+}
+
+/* .container {
+    width: min(100% - 15px, 840px);
+    margin-inline: auto;
+    background-color: #4E2ECF;
+} */
+/* 
+.sidenav { 
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index:1;
+    top:0;
+    left:0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding:6px 8px 6px 16px;
+    text-decoration: none;
+    font-size:25px;
+    color: #818181;
+    display:block;
+
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+} */
+
+/* .main{
+    margin-left:160px;
+    padding: 0px 10px;
+} */

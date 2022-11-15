@@ -1,0 +1,19 @@
+<div id="menu">
+    <div class="submenu">
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">Dashboard</a></li>
+            <li><a href="">Users</a></li>
+            <li><a href="">Help</a></li>
+        </ul>
+        {% comment %} {% for link in menu.links %}
+        <a
+        href="{{link.url}}"
+        {% if link.new_window %}target="_blank"{% endif %}
+        class="item{% if link.current|default:"" %} current{% endif %}{% if link.active %} active{% endif %}">{{ link.name }}</a>
+        {% endfor %} {% endcomment %}
+    </div>
+    {% comment %} {% if menu.submenu.links %}
+        {% include 'dashboard/submenu.html' with submenu=menu.submenu %}
+    {% endif %} {% endcomment %}
+</div>
