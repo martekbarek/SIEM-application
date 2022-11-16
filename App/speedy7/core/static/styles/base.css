@@ -2,11 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Sono:wght@200;300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap');
 body {
-    background: rgb(24,24,65);
     background: linear-gradient(0deg, rgba(24,24,65,1) 0%, rgba(29,29,66,1) 58%, rgba(29,29,66,1) 100%);font-size: calc(0.24vh + 0.32vw + 6px);
     min-height: 100vh;
-    /* font-family: 'Roboto Mono', monospace; */
-    /* font-family: 'Sono', sans-serif; */
     font-family: 'Quicksand', sans-serif;
     color: #ffffff;
     /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg"); */
@@ -59,43 +56,86 @@ body {
   
   /* On mouse-over, add a deeper shadow */
 .container:hover {
-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.search_container {
+    font-weight: 100;
+    font-size: smaller;
+    border-radius: 0.3rem;
+    text-align: right;
+    padding: 1rem 2rem;
+    width: 70vw;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 1.2rem auto;
+    background-color: #11112c;
+
+}
+
+.search_container label {
+    font-weight: 400;
+}
+
+.search_container input {
+    /* border-radius: 1rem; */
+  
+    border-color: #190072;
+    border-width: 1px;
+    color: #ffffff;
+    padding: 1vw;
+}
+
+.search_container input[type=text]:hover{
+    box-shadow: 0 0 5pt 0.5pt #000000;
+}
+
+.search_container input[type=text]:focus {
+    box-shadow: 0 8 5pt 2pt #D3D3D3;
+    outline-width: 0px;
 }
 
 .container {
-    font-size: smaller;
     border-radius: 0.4rem;
+    font-size: 0.8rem;
+    padding: 1rem 2rem;
     text-align: center;
-    width: 80vw;
-    height: 40vw;
-    padding: 1.8rem 2.4rem;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    display: grid; 
-    transition: 480ms cubic-bezier(0.04, 1.15, 0.41, 0.93) background 0ms;
-    margin: 1.2rem auto;
-    background-color: #11112c;
-    grid-template-columns: 1fr 1fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr; 
-    gap: 0px 0px; 
-    grid-template-areas: 
-      "Logs Logs Logs"
-      "Logs Logs Logs"
-      ". . ."; 
+    margin: 1.2rem auto; 
+    background-color: #11112c; 
+    height: auto;
+    width: auto;
 }
-.Logs { grid-area: Logs; }
 
-table {
-    color: white;
-    background: #343A40;
-    /* background: rgb(98,0,255); */
-    /* background: linear-gradient(90deg, rgba(98,0,255,0.5) 0%, rgba(231,0,255,1) 100%); */
+.tab {
+    width: 100%;
+}
+
+
+.container table .header2 {
+    font-weight: 600;
+}
+
+.container table td {
+    border-bottom: 1px solid #1f1f35
+
 }
 
 .header2 {
     color: #ffffff;
-    background: rgb(64, 46, 105);
-    /* background: rgb(198, 173, 255); */
-    /* background: linear-gradient(90deg, rgba(134,83,255,1) 0%, rgba(180,106,241,1) 100%); */
-    /* background: linear-gradient(90deg, rgb(61, 61, 61) 0%, rgb(154, 153, 155) 100%); */
-  
+}
+
+.input-text-log {
+    background-color: #101024;
+    border-radius: 0.4rem;
+    border-color: #11112c;
+    color: #04AA6D;
+    cursor: auto;
+    width: 10vw;;
+    border-style: hidden;
+}
+
+td, tr {
+    padding: 5px 5px 5px 5px; /* Increase font-size */
+    border: #ffffff;
 }

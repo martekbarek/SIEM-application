@@ -4,49 +4,87 @@
 {% block content %}
     {% csrf_token %}
     {% include 'speedy/menu.html' %}
-  
-    <div class="container">
-        <div class="Logs">
-            
-            <table class="table table-dark">
-            {% comment %} <tr class="header">
-                <th colspan="100%">logs</th>
-            </tr> {% endcomment %}
-            
-            <tr class="header2">
-                <th>PID</th>
-                <th>Message</th>
-                <th>Program</th>
-                <th>Facility</th>
-                <th>Host</th>
-                <th>Level</th>
-                <th>Timestamp</th>
-            </tr>
-           
-            {% for log in all_logs %}
-            <div class="records">
-                {% comment %} <tr class="bg-primary">...</tr>
-                <tr class="bg-success">...</tr>
-                <tr class="bg-warning">...</tr>
-                <tr class="bg-danger">...</tr>
-                <tr class="bg-info">...</tr> {% endcomment %}
-                <tr>
-                    <td>{{log.pid}}</td>
-                    <td>{{log.message}}</td>
-                    <td>{{log.program}}</td>
-                    <td>{{log.facility}}</td>
-                    <td>{{log.host}}</td>
-                    <td>{{log.level}}</td>
-                    <td>{{log.datetime}}</td>
-           
+    
+    <script>
+          function myFunction(){
+            // Declare variables 
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+          
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td") ; 
+              for(j=0 ; j<td.length ; j++)
+              {
+                let tdata = td[j] ;
+                if (tdata) {
+                  if (tdata.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break ; 
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                } 
+              }
+            }
+          }
+    </script> 
 
-                </tr>
-            </div>
-            {% endfor %}
+    <div class="search_container">
+        <input type="text" id="myInput" class="input-text-log" onkeyup="myFunction()" placeholder="Search">
+    </div>
+
+    <div class="container">
+            <table class="tab sortable">
+                <thead>
+                    <tr class="header2">
+                        <td>PID</td>
+                        <td>Message</td>
+                        <td>Program</td>
+                        <td>Facility</td>
+                        <td>Host</td>
+                        <td>Level</td>
+                        <td>Timestamp</td>
+                    </tr>
+                </thead>
+
+                <tbody id="myTable">
+                    {% for log in all_logs %}
+                        {% comment %} <tr class="bg-primary">...</tr>
+                        <tr class="bg-success">...</tr>
+                        <tr class="bg-warning">...</tr>
+                        <tr class="bg-danger">...</tr>
+                        <tr class="bg-info">...</tr> {% endcomment %}
+                        <tr>
+                            <td>{{log.pid}}</td>
+                            <td>{{log.message}}</td>
+                            <td>{{log.program}}</td>
+                            <td>{{log.facility}}</td>
+                            <td>{{log.host}}</td>
+                            <td>{{log.level}}</td>
+                            <td>{{log.datetime}}</td>
+                        </tr>
+                    
+                    {% endfor %}
+                </tbody>
             </table>
-        </div>
     </div>
     
 
+{% comment %} <script type="text/javascript"> 
+    window.onload = function() {
+        if (window.jQuery) {
+            alert('jQuery is loaded');
+        } else {
+            alert('jQuery is not loaded');
+        }
+    }
+</script> {% endcomment %}
+
 {% endblock %}
+
+
 
