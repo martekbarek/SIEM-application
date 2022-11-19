@@ -154,6 +154,24 @@ td, tr {
     "card1 card2 card2"; 
 }
 
+.graphs2 {
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin: 1.2rem auto; 
+    height: auto;
+    width: auto;
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+    "card5 card4 card3 card3"
+    "card5 card4 card3 card3"
+    "card5 card4 card3 card3"; 
+}
+
 .card1 {
     border-radius: 0.4rem;
     font-size: 0.8rem;
@@ -176,3 +194,35 @@ td, tr {
     height: auto;
 }
 
+.card3 {
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    padding: 1rem 2rem;
+    margin: 1vw 1vw; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #11112c; 
+    grid-area: card3;
+    height: auto;
+}
+
+.card4 {
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    padding: 1rem 2rem;
+    margin: 1vw 1vw; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #11112c; 
+    grid-area: card4;
+    height: auto;
+}
+
+.card5 {
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    padding: 1rem 2rem;
+    margin: 1vw 1vw; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #11112c; 
+    grid-area: card5;
+    height: auto;
+}
