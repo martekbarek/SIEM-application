@@ -167,9 +167,9 @@ td, tr {
     grid-template-rows: 1fr 1fr 1fr 1fr; 
     gap: 0px 0px; 
     grid-template-areas: 
-    "card5 card4 card3 card3"
-    "card5 card4 card3 card3"
-    "card5 card4 card3 card3"; 
+    "card3 card4 card5 card5"
+    "card3 card4 card5 card5"
+    "card3 card4 card5 card5"; 
 }
 
 .card1 {
