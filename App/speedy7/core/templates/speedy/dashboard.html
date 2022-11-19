@@ -75,19 +75,24 @@
     </div>
 
     <div class="graphs">
-      <div class="card1"> <h4>Events based on facility</h4> <canvas id="myChart"></canvas></div>
+      <div class="card1"> <h4>Events based on host</h4> <canvas id="barChart"></canvas></div>
       
-      <div class="card2"> <canvas id="timeChart"> </div>
+      <div class="card2"> <canvas id="timeChart"> </canvas></div>
     </div>
 
     <div class="graphs2">
-      <div class="card3"> </div>
+      <div class="card3">
+        
+        <h3>Incidents</h3> </div>
+
+
       <div class="card4"> </div>
       <div class="card5"> 
-        <h3>Active hosts</h3>
+        <h3>Last active host</h3>
         <table class="tab sortable">
           <thead>
               <tr class="header2">
+                  <td></td>
                   <td>Name</td>
                   <td>IP</td>
                   <td>Last activity</td>
@@ -96,7 +101,8 @@
           <tbody id="myTable">
               {% for host,log in last_activity_dict.items %}
                   <tr>
-                      <td><span>&#128308;</span><span>&#128994;</span>{{host}}</td>
+                      <td><span>&#128308;</span><span>&#128994;</span></td>
+                      <td>{{host}}</td>
                       <td>{{log.pid}}</td>
                       <td>{{log.datetime}}</td>
                   </tr>
@@ -106,22 +112,24 @@
       </div>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
     <script src="{% static 'chart.js' %}"></script>
     <script>
-      const ctx = document.getElementById('myChart');
-      const ctx2 = document.getElementById('timeChart');
+      const barChart = document.getElementById('barChart');
     
-      new Chart(ctx, {
+      new Chart(barChart, {
         type: 'bar',
         data: {
           labels: [{% for facility,value in fac_counter_dict.items %} "{{facility}}", {% endfor %}],
           datasets: [{
             label: '',
+            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
             data: [{% for facility,value in fac_counter_dict.items %} "{{value}}", {% endfor %}],
             borderWidth: 1
           }]
         },
         options: {
+          legend: { display: false },
           scales: {
             y: {
               beginAtZero: true
@@ -130,11 +138,14 @@
         }
 
       });
+    </script>
 
-      new Chart(ctx2, {
-        type: 'line',
-        data: {
-          labels: [Utils.months({count: 7})],
+    <script>
+
+      const timeChart = document.getElementById('timeChart');
+      const labels = [];
+      const data = {
+          labels: labels,
           datasets: [{
             label: 'My First Dataset',
             data: [65, 59, 80, 81, 56, 55, 40],
@@ -142,15 +153,24 @@
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
           }]
-        }, options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
+        };
+
+      const config = {
+        type: 'line',
+        data: data,
+      };
+
+      const options = {
+        scales: {
+          x: {
+            type: ''
           }
         }
-      });
 
+      }
+
+      new Chart(timeChart, 
+        config);
 
     </script>
     

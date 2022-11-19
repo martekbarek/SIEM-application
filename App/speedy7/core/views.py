@@ -26,8 +26,10 @@ def dashboard(response):
         last_activity_dict[name]=Log.objects.order_by('-datetime').filter(host=name).first()
     
     
+    incidents = (log for log in all_logs if log.level[-1] < 3)
+    
       
     
-    context = {"all_logs":all_logs, "fac_counter_dict":fac_counter_dict ,"last_activity_dict":last_activity_dict, 'myFilter':myFilter}
+    context = {"all_logs":all_logs, "fac_counter_dict":fac_counter_dict ,"incidents":incidents,"last_activity_dict":last_activity_dict, 'myFilter':myFilter}
     
     return render(response, 'speedy/dashboard.html', context)
