@@ -54,11 +54,6 @@ body {
     background-color: #04AA6D;
 }
   
-  /* On mouse-over, add a deeper shadow */
-.container:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
 .search_container {
     font-weight: 100;
     font-size: smaller;
@@ -80,10 +75,10 @@ body {
 .search_container input {
     /* border-radius: 1rem; */
   
-    border-color: #190072;
+    border-color: #1f0188;
     border-width: 1px;
     color: #ffffff;
-    padding: 1vw;
+    padding: 0.7vw 0.5vw;
 }
 
 .search_container input[type=text]:hover{
@@ -104,7 +99,7 @@ body {
     margin: 1.2rem auto; 
     background-color: #11112c; 
     height: auto;
-    width: auto;
+    width: 70vw;
 }
 
 .tab {
@@ -139,3 +134,45 @@ td, tr {
     padding: 5px 5px 5px 5px; /* Increase font-size */
     border: #ffffff;
 }
+
+
+.graphs {
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin: 1.2rem auto; 
+    height: auto;
+    width: auto;
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+    "card1 card2 card2"
+    "card1 card2 card2"
+    "card1 card2 card2"; 
+}
+
+.card1 {
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    padding: 1rem 2rem;
+    margin: 1vw 1vw; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #11112c; 
+    grid-area: card1;
+    height: auto;
+}
+
+.card2 {
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    padding: 1rem 2rem;
+    margin: 1vw 1vw; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #11112c; 
+    grid-area: card2;
+    height: auto;
+}
+
