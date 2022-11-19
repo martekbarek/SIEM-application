@@ -226,3 +226,15 @@ td, tr {
     grid-area: card5;
     height: auto;
 }
+
+.card3 table {
+    text-align: left;
+    background-color: #a1070275;
+    
+}
+
+.card3 table td, tr {
+    padding: 5px 5px 5px 5px; /* Increase font-size */
+    border: 1px solid #1f1f35
+    
+}

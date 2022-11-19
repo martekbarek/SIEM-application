@@ -83,7 +83,30 @@
     <div class="graphs2">
       <div class="card3">
         
-        <h3>Incidents</h3> </div>
+        <h3>Incidents</h3> 
+        <table class="tab sortable">
+          <thead>
+              <tr class="header2">
+                  <td>Host</td>
+                  <td>Facility</td>
+                  <td>Message</td>
+              </tr>
+          </thead>
+
+          <tbody id="myTable">
+              {% for inc in incidents %}
+             
+                  <tr style="background-color: {% if inc.level == 'local0' %}#a1070275{% elif inc.level == 'local1' %}#610f7f49{% elif inc.level == 'local2' %}#ec9b2973{% elif inc.level == 'local3' %}#ec9b2973{% endif %}">
+                    {% comment %} add href to full, and create asset view {% endcomment %}
+                      <td>{{inc.host}}</td>
+                      <td>{{inc.facility}}</td>
+                      <td>{{inc.message}}</td>
+                     
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      </div>
 
 
       <div class="card4"> </div>

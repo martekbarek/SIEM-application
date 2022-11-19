@@ -6,7 +6,8 @@ from .filters import LogFilter
 # Create your views here.
 def dashboard(response):
     
-    all_logs = Log.objects.order_by('-datetime').all()
+    all_logs_query = Log.objects.order_by('-datetime').all
+    all_logs = all_logs_query()
     
     myFilter = LogFilter()
     
@@ -26,7 +27,7 @@ def dashboard(response):
         last_activity_dict[name]=Log.objects.order_by('-datetime').filter(host=name).first()
     
     
-    incidents = (log for log in all_logs if log.level[-1] < 3)
+    incidents = tuple(log for log in Log.objects.order_by('level') if int(log.level[-1]) <= 3)
     
       
     
