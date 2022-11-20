@@ -35,6 +35,7 @@ DEBUG = int(os.environ.get("DEBUG", default=1))
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -127,3 +128,5 @@ STATIC_URL = "core/static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CRISPY_TEMPLATE_PACK="bootstrap4"

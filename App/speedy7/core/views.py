@@ -28,9 +28,13 @@ def dashboard(response):
     
     
     incidents = tuple(log for log in Log.objects.order_by('level') if int(log.level[-1]) <= 3)
+
+    context = {"all_logs":all_logs, "facilities":facilities,"hosts":hosts,"fac_counter_dict":fac_counter_dict ,"incidents":incidents,"last_activity_dict":last_activity_dict, 'myFilter':myFilter}
     
-      
+    if response.method == "GET":
+        filteredLogs = LogFilter(response.GET, queryset=all_logs)
+        context = {"all_logs":filteredLogs.qs, "facilities":facilities,"hosts":hosts,"fac_counter_dict":fac_counter_dict ,"incidents":incidents,"last_activity_dict":last_activity_dict, 'myFilter':myFilter}
+        return render(response, 'speedy/dashboard.html', context)
     
-    context = {"all_logs":all_logs, "fac_counter_dict":fac_counter_dict ,"incidents":incidents,"last_activity_dict":last_activity_dict, 'myFilter':myFilter}
     
     return render(response, 'speedy/dashboard.html', context)

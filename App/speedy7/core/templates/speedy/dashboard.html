@@ -1,5 +1,6 @@
 {% extends 'speedy/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {%block title%}Dashboard{%endblock%}
 {% block content %}
@@ -35,6 +36,28 @@
     </script> 
 
     <div class="search_container">
+      <form method="get">
+        <select name="host">
+          <option></option>
+          {% for host in hosts %}
+          <option value="{{host}}">{{host}}</option>
+          {% endfor %}
+        </select>
+        <select name="facility">
+          <option></option>
+          {% for facility in facilities %}
+          <option value="{{facility}}">{{facility}}</option>
+          {% endfor %}
+        </select>   
+        <select id="time">
+          <option value=""></option>
+          <option value="">Last 15 minutes</option>
+          <option value="">Last 30 minutes</option>
+          <option value="">Last 4 hours</option>
+        </select>   
+        <button class="btn btn-danger" type="submit">Submit</button>
+      </form>
+        
         <input type="text" id="myInput" class="input-text-log" onkeyup="myFunction()" placeholder="Search">
     </div>
 
@@ -54,11 +77,6 @@
 
                 <tbody id="myTable">
                     {% for log in all_logs %}
-                        {% comment %} <tr class="bg-primary">...</tr>
-                        <tr class="bg-success">...</tr>
-                        <tr class="bg-warning">...</tr>
-                        <tr class="bg-danger">...</tr>
-                        <tr class="bg-info">...</tr> {% endcomment %}
                         <tr>
                             <td>{{log.pid}}</td>
                             <td>{{log.message}}</td>
@@ -75,7 +93,7 @@
     </div>
 
     <div class="graphs">
-      <div class="card1"> <h4>Events based on host</h4> <canvas id="barChart"></canvas></div>
+      <div class="card1"> <h4>Events based on facility</h4> <canvas id="barChart"></canvas></div>
       
       <div class="card2"> <canvas id="timeChart"> </canvas></div>
     </div>
