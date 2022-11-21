@@ -53,41 +53,77 @@ body {
 .active {
     background-color: #04AA6D;
 }
-  
-.search_container {
-    font-weight: 100;
-    font-size: smaller;
-    border-radius: 0.3rem;
-    text-align: right;
-    padding: 1rem 2rem;
-    width: 70vw;
+
+.conatiner .search_container {
+    width: auto;
     height: auto;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    margin: 1.2rem auto;
+    text-align:center;
+}
+
+.search_container .prop_search {
+    float: left;
+    width: 80%;
+    text-align: left;
+    height: 100%;
+    margin: auto;
+}
+
+
+.search_container .prop_search select {
+    margin: 1vw 2vh 1vw 2vh;
+    color: white;
+    background-color: #101024;
+    border-radius: 1px;
+    border: 1px solid #2d2d49
+}
+
+.search_container .prop_search option {
+    color: white;
     background-color: #11112c;
-
 }
 
-.search_container label {
-    font-weight: 400;
+.container .search_container .global_search {
+    float: right;
+    width: 20%;
+    height: 100%;
+    margin: auto;
 }
 
-.search_container input {
+.container .search_container .prop_search .search_button {
+
+    background-color: #11112c; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sortable {
+    width: 100%;
+}
+
+.container .search_container input {
     /* border-radius: 1rem; */
-  
-    border-color: #1f0188;
-    border-width: 1px;
-    color: #ffffff;
+    color: white;
     padding: 0.7vw 0.5vw;
+    
+    height: 1vh;
+    width: 20vh;
 }
 
 .search_container input[type=text]:hover{
     box-shadow: 0 0 5pt 0.5pt #000000;
 }
 
-.search_container input[type=text]:focus {
-    box-shadow: 0 8 5pt 2pt #D3D3D3;
-    outline-width: 0px;
+.input-text-log {
+    background-color: #11112c;
+    border: 1px solid #2d2d49;
+    border-radius: 0.4rem;
+    cursor: auto;
+    margin: auto;
 }
 
 .container {
@@ -102,37 +138,23 @@ body {
     width: 70vw;
 }
 
-.tab {
+.container table {
     width: 100%;
-}
-
-
-.container table .header2 {
-    font-weight: 600;
-}
-
-.container table td {
-    border-bottom: 1px solid #1f1f35
-
 }
 
 .header2 {
     color: #ffffff;
+    background-color: #2d2d49;
 }
 
-.input-text-log {
-    background-color: #101024;
-    border-radius: 0.4rem;
-    border-color: #11112c;
-    color: #04AA6D;
-    cursor: auto;
-    width: 10vw;;
-    border-style: hidden;
+.container table td {
+    border-bottom: 1px solid #2d2d49
+
 }
 
 td, tr {
     padding: 5px 5px 5px 5px; /* Increase font-size */
-    border: #ffffff;
+    border: #2d2d49;
 }
 
 
@@ -234,6 +256,6 @@ td, tr {
 
 .card3 table td, tr {
     padding: 5px 5px 5px 5px; /* Increase font-size */
-    border: 1px solid #1f1f35
+    border: 1px solid #2d2d49
     
 }

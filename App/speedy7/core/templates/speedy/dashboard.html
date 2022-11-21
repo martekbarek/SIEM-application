@@ -36,34 +36,38 @@
           }
     </script> 
 
-    <div class="search_container">
-      <form method="get">
-        <select name="host">
-          <option></option>
-          {% for host in hosts %}
-          <option value="{{host}}">{{host}}</option>
-          {% endfor %}
-        </select>
-        <select name="facility">
-          <option></option>
-          {% for facility in facilities %}
-          <option value="{{facility}}">{{facility}}</option>
-          {% endfor %}
-        </select>   
-        <select id="time">
-          <option value=""></option>
-          <option value="15">Last 15 minutes</option>
-          <option value="30">Last 30 minutes</option>
-          <option value="240">Last 4 hours</option>
-        </select>   
-        <button class="btn btn-danger" type="submit">Submit</button>
-      </form>
-        
-        <input type="text" id="myInput" class="input-text-log" onkeyup="myFunction()" placeholder="Search">
-    </div>
-
+    
     <div class="container" id="logs">
-            <table class="tab sortable">
+      <div class="search_container">
+        <div class="prop_search">
+          <form method="get">
+            Host:<select name="host">
+              <option></option>
+              {% for host in hosts %}
+              <option value="{{host}}">{{host}}</option>
+              {% endfor %}
+            </select>
+            Facility:<select name="facility">
+              <option></option>
+              {% for facility in facilities %}
+              <option value="{{facility}}">{{facility}}</option>
+              {% endfor %}
+            </select>   
+            Time:<select id="time">
+              <option value=""></option>
+              <option value="15">Last 15 minutes</option>
+              <option value="30">Last 30 minutes</option>
+              <option value="240">Last 4 hours</option>
+            </select>   
+            <button class="search_button" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+        <div class="global_search">
+          <input type="text" id="myInput" class="input-text-log" onkeyup="myFunction()" placeholder="Search">
+        </div>
+      </div>
+    
+            <table class="sortable">
                 <thead>
                     <tr class="header2">
                         <td>PID</td>
@@ -103,7 +107,7 @@
       <div class="card3">
         
         <h3>Incidents</h3> 
-        <table class="tab sortable">
+        <table class="sortable">
           <thead>
               <tr class="header2">
                   <td>Urgency</td>
@@ -134,7 +138,7 @@
       <div class="card4"> </div>
       <div class="card5"> 
         <h3>Last active host</h3>
-        <table class="tab sortable">
+        <table class="tab sortable" style="text-align: left">
           <thead>
               <tr class="header2">
                   {% comment %} <td></td> {% endcomment %}
@@ -147,7 +151,7 @@
               {% for host,log in last_activity_dict.items %}
                   <tr>
                       {% comment %} <td>{% if log.datetime|activityfilter:10 %}<h5>inactive for less than 10 minutes</h5>{% elif log.datetime|activityfilter:120 %}<h5>inactive for less than 2 hours</h5>{% elif log.datetime|activityfilter:240 %}<h5>inactive for less than 4 hours</h5>{% else %}<h10>inactive for more than 4 hours</h10>{% endif %}</td> {% endcomment %}
-                      <td>{% if log.datetime|activityfilter:10 %}<span>&#128994;</span>{% elif log.datetime|activityfilter:120 %}<span>&#128993;</span>{% else %}<span>&#128308;</span>{% endif %}{{host}}</td>
+                      <td >{% if log.datetime|activityfilter:10 %}<span>&#128994;</span>{% elif log.datetime|activityfilter:120 %}<span>&#128993;</span>{% else %}<span>&#128308;</span>{% endif %}{{host}}</td>
                       <td>{{log.pid}}</td>
                       <td>{{log.datetime|timesince}} ago</td>
                   </tr>
