@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Log
 from .filters import LogFilter
+from .templatetags.activityfilter import activityfilter
 
 # Create your views here.
 def dashboard(response):
@@ -10,7 +11,7 @@ def dashboard(response):
     all_logs_query = Log.objects.order_by('-datetime').all
     all_logs = all_logs_query()
      
-    myFilter = LogFilter()
+  
     
     # get all facilities
     facilities = set(item.facility for item in all_logs)
@@ -38,16 +39,17 @@ def dashboard(response):
     
     # filter urgent logs   
     incidents = tuple(log for log in Log.objects.order_by('level') if int(log.level[-1]) <= 3)
+    logFilter = LogFilter(response.GET, queryset=all_logs)
+    filteredLogs = logFilter.qs
 
-    context = {"all_logs":all_logs, "facilities":facilities,"hosts":hosts,"host_counter_dict":host_counter_dict ,"incidents":incidents,"last_activity_dict":last_activity_dict, 'myFilter':myFilter}
+    if 'time' in (req:=response.GET) and req['time'] != '': 
+        minutes = req['time']
+        filteredLogs = tuple(filter(lambda x: activityfilter(x.datetime,int(minutes)),filteredLogs))
     
-    if response.method == "GET":
-        filteredLogs = LogFilter(response.GET, queryset=all_logs)
-        context = {"all_logs":filteredLogs.qs, "facilities":facilities,"hosts":hosts,"host_counter_dict":host_counter_dict,"fac_counter_dict":fac_counter_dict ,"incidents":incidents,"last_activity_dict":last_activity_dict, 'myFilter':myFilter}
-        return render(response, 'speedy/dashboard.html', context)
-
-    
+    context = {"all_logs":filteredLogs, "facilities":facilities,"hosts":hosts,"host_counter_dict":host_counter_dict,"fac_counter_dict":fac_counter_dict ,"incidents":incidents,"last_activity_dict":last_activity_dict, 'myFilter':logFilter}
     return render(response, 'speedy/dashboard.html', context)
+
+    
     
     
     

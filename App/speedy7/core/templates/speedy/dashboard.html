@@ -42,19 +42,19 @@
         <div class="prop_search">
           <form method="get">
             Host:<select name="host">
-              <option></option>
+              <option value="">All</option>
               {% for host in hosts %}
               <option value="{{host}}">{{host}}</option>
               {% endfor %}
             </select>
             Facility:<select name="facility">
-              <option></option>
+              <option value="">All</option>
               {% for facility in facilities %}
               <option value="{{facility}}">{{facility}}</option>
               {% endfor %}
             </select>   
-            Time:<select id="time">
-              <option value=""></option>
+            Time:<select name="time">
+              <option value="">All</option>
               <option value="15">Last 15 minutes</option>
               <option value="30">Last 30 minutes</option>
               <option value="240">Last 4 hours</option>
@@ -100,7 +100,7 @@
     <div class="graphs">
       <div class="card1"> <h4>Events based on host</h4> <canvas id="barChart"></canvas></div>
       
-      <div class="card2"> <canvas id="timeChart"> </canvas></div>
+      <div class="card2"> <canvas id="scatterChart"></canvas></div>
     </div>
 
     <div class="graphs2">
@@ -182,7 +182,9 @@
             y: {
               beginAtZero: true
             }
-          }
+          }, animation: {
+            duration: 3000,
+        }, responsive: true,
         }
 
       });
@@ -197,20 +199,29 @@
           labels: [{% for host,value in fac_counter_dict.items %} "{{host}}", {% endfor %}],
           datasets: [{
             label: '',
-            backgroundColor: ["#e8c3b9","#c45850","#3e95cd","#3e95cd", "#8e5ea2","#3cba9f", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+            backgroundColor: ["#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
             data: [{% for host,value in fac_counter_dict.items %} "{{value}}", {% endfor %}],
             hoverOffset: 4,
             borderWidth: 0
           }]
+        },
+        options: {
+          animation: {
+            duration: 3000,
+        }, responsive: true,
         }
       });
     </script>
 
     <script>
 
-      const timeChart = document.getElementById('timeChart');
-      const labels = [];
-      const data = {
+      const lineChart = document.getElementById('scatterChart');
+    
+      const labels = Utils.months({count: 7});
+
+      new Chart(scatterChart, {
+        type: 'line',
+        data: {
           labels: labels,
           datasets: [{
             label: 'My First Dataset',
@@ -219,24 +230,8 @@
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
           }]
-        };
-
-      const config = {
-        type: 'line',
-        data: data,
-      };
-
-      const options = {
-        scales: {
-          x: {
-            type: ''
-          }
         }
-
-      }
-
-      new Chart(timeChart, 
-        config);
+      });
 
     </script>
     
