@@ -98,7 +98,7 @@
     </div>
 
     <div class="graphs">
-      <div class="card1"> <h4>Events based on facility</h4> <canvas id="barChart"></canvas></div>
+      <div class="card1"> <h4>Events based on host</h4> <canvas id="barChart"></canvas></div>
       
       <div class="card2"> <canvas id="timeChart"> </canvas></div>
     </div>
@@ -135,7 +135,7 @@
       </div>
 
 
-      <div class="card4"> </div>
+      <div class="card4"> <canvas id="doughnutChart"></canvas></div>
       <div class="card5"> 
         <h3>Last active host</h3>
         <table class="tab sortable" style="text-align: left">
@@ -169,16 +169,15 @@
       new Chart(barChart, {
         type: 'bar',
         data: {
-          labels: [{% for facility,value in fac_counter_dict.items %} "{{facility}}", {% endfor %}],
+          labels: [{% for host,value in host_counter_dict.items %} "{{host}}", {% endfor %}],
           datasets: [{
-            label: '',
+            label: ['Events'],
             backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-            data: [{% for facility,value in fac_counter_dict.items %} "{{value}}", {% endfor %}],
+            data: [{% for host,value in host_counter_dict.items %} "{{value}}", {% endfor %}],
             borderWidth: 1
           }]
         },
         options: {
-          legend: { display: false },
           scales: {
             y: {
               beginAtZero: true
@@ -186,6 +185,24 @@
           }
         }
 
+      });
+    </script>
+
+    <script>
+      const doughnutChart = document.getElementById('doughnutChart');
+    
+      new Chart(doughnutChart, {
+        type: 'doughnut',
+        data: {
+          labels: [{% for host,value in fac_counter_dict.items %} "{{host}}", {% endfor %}],
+          datasets: [{
+            label: '',
+            backgroundColor: ["#e8c3b9","#c45850","#3e95cd","#3e95cd", "#8e5ea2","#3cba9f", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+            data: [{% for host,value in fac_counter_dict.items %} "{{value}}", {% endfor %}],
+            hoverOffset: 4,
+            borderWidth: 0
+          }]
+        }
       });
     </script>
 
