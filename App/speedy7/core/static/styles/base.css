@@ -92,7 +92,7 @@ body {
 
 .container {
     border-radius: 0.4rem;
-    font-size: 1.3vh;
+    font-size: 0.8rem;
     padding: 1rem 2rem;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -229,7 +229,6 @@ td, tr {
 
 .card3 table {
     text-align: left;
-    background-color: #a1070275;
     
 }
 

@@ -1,6 +1,7 @@
 {% extends 'speedy/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load activityfilter %}
 
 {%block title%}Dashboard{%endblock%}
 {% block content %}
@@ -51,9 +52,9 @@
         </select>   
         <select id="time">
           <option value=""></option>
-          <option value="">Last 15 minutes</option>
-          <option value="">Last 30 minutes</option>
-          <option value="">Last 4 hours</option>
+          <option value="15">Last 15 minutes</option>
+          <option value="30">Last 30 minutes</option>
+          <option value="240">Last 4 hours</option>
         </select>   
         <button class="btn btn-danger" type="submit">Submit</button>
       </form>
@@ -105,6 +106,7 @@
         <table class="tab sortable">
           <thead>
               <tr class="header2">
+                  <td>Urgency</td>
                   <td>Host</td>
                   <td>Facility</td>
                   <td>Message</td>
@@ -114,8 +116,10 @@
           <tbody id="myTable">
               {% for inc in incidents %}
              
-                  <tr style="background-color: {% if inc.level == 'local0' %}#a1070275{% elif inc.level == 'local1' %}#610f7f49{% elif inc.level == 'local2' %}#ec9b2973{% elif inc.level == 'local3' %}#ec9b2973{% endif %}">
+                  <tr>
+                  {% comment %} <tr style="background-color: {% if inc.level == 'local0' %}#a1070275{% elif inc.level == 'local1' %}#610f7f49{% elif inc.level == 'local2' %}#ec9b2973{% elif inc.level == 'local3' %}#ec9b2973{% endif %}"> {% endcomment %}
                     {% comment %} add href to full, and create asset view {% endcomment %}
+                      <td>{% if inc.level == 'local0' %}!!!!{% elif inc.level == 'local1' %}!!!{% elif inc.level == 'local2' %}!!{% elif inc.level == 'local3' %}!{% endif %}</td>
                       <td>{{inc.host}}</td>
                       <td>{{inc.facility}}</td>
                       <td>{{inc.message}}</td>
@@ -133,7 +137,7 @@
         <table class="tab sortable">
           <thead>
               <tr class="header2">
-                  <td></td>
+                  {% comment %} <td></td> {% endcomment %}
                   <td>Name</td>
                   <td>IP</td>
                   <td>Last activity</td>
@@ -142,10 +146,10 @@
           <tbody id="myTable">
               {% for host,log in last_activity_dict.items %}
                   <tr>
-                      <td><span>&#128308;</span><span>&#128994;</span></td>
-                      <td>{{host}}</td>
+                      {% comment %} <td>{% if log.datetime|activityfilter:10 %}<h5>inactive for less than 10 minutes</h5>{% elif log.datetime|activityfilter:120 %}<h5>inactive for less than 2 hours</h5>{% elif log.datetime|activityfilter:240 %}<h5>inactive for less than 4 hours</h5>{% else %}<h10>inactive for more than 4 hours</h10>{% endif %}</td> {% endcomment %}
+                      <td>{% if log.datetime|activityfilter:10 %}<span>&#128994;</span>{% elif log.datetime|activityfilter:120 %}<span>&#128993;</span>{% else %}<span>&#128308;</span>{% endif %}{{host}}</td>
                       <td>{{log.pid}}</td>
-                      <td>{{log.datetime}}</td>
+                      <td>{{log.datetime|timesince}} ago</td>
                   </tr>
               {% endfor %}
           </tbody>
