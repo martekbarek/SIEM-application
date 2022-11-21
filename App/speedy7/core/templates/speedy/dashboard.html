@@ -213,10 +213,12 @@
       });
     </script>
 
-    <script>
 
+    <script src="{% static 'utils.js' %}"></script>
+    <script>
+      const Utils = ChartUtils.init();
       const lineChart = document.getElementById('scatterChart');
-    
+      // create filter that will receive x hours back from last event
       const labels = Utils.months({count: 7});
 
       new Chart(scatterChart, {
