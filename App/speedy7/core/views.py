@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Log
 from .filters import LogFilter
+from dateutil import tz
+from datetime import datetime,timedelta
 from .templatetags.activityfilter import activityfilter
 
 # Create your views here.
@@ -37,6 +39,10 @@ def dashboard(response):
                 counter += 1
         host_counter_dict[name] = counter
 
+    # sort last_activity_dict by date
+    sorted_last_activity_dict = dict(sorted(last_activity_dict.items(), key=lambda x : x[1].datetime, reverse=True))
+
+    
     # filter urgent logs
     incidents = tuple(log for log in Log.objects.order_by(
         'level') if int(log.level[-1]) <= 3)
@@ -48,12 +54,31 @@ def dashboard(response):
         filteredLogs = tuple(filter(lambda x: activityfilter(
             x.datetime, int(minutes)), filteredLogs))
 
+    #
+    # last_activity = list(sorted_last_activity_dict.values())[0].datetime
+
+   
+    chart_hours = sorted(tuple((datetime.now(tz=tz.gettz("UTC")).replace(minute=0, second=0, microsecond=0) - timedelta(minutes=x*30)) 
+                        for x in range(12)))
+
+    
+    activity_hours = dict(zip(chart_hours, [None]*len(chart_hours)))
+    
+    # it is possible to check activity based on last event and then strftime when not today
+   
+    for log in all_logs :
+        if (time:=log.datetime.replace(minute=(30 if log.datetime.minute > 30 else 0), second=0, microsecond=0)) in chart_hours:
+            activity_hours[time]=log
+
+
     context = {"all_logs": filteredLogs, "facilities": facilities,
                "hosts": hosts,
                "host_counter_dict": host_counter_dict,
                "fac_counter_dict": fac_counter_dict,
                "incidents": incidents,
-               "last_activity_dict": last_activity_dict,
+               "chart_hours": chart_hours,
+               "activity_hours": activity_hours,
+               "last_activity_dict": sorted_last_activity_dict,
                "myFilter": logFilter}
 
     return render(response, 'speedy/dashboard.html', context)

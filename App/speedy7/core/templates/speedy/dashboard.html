@@ -11,7 +11,7 @@
     <script>
           setTimeout(() => {
             document.location.reload();
-          }, 10000);
+          }, 1200000);
 
 
           function myFunction(){
@@ -224,24 +224,44 @@
       const Utils = ChartUtils.init();
       const lineChart = document.getElementById('scatterChart');
       // create filter that will receive x hours back from last event
-      const labels = Utils.months({count: 7});
+      const labels = [{% for datetime, log in activity_hours.items %} "{{datetime}}", {% endfor %}];
 
       new Chart(scatterChart, {
         type: 'line',
         data: {
           labels: labels,
-          datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
+          datasets: [{% for datetime, log in activity_hours.items %}{% if log.host %}{ 
+            
+            // tutaj funkcja in i bedzie
+            // dict (nazwahosta,dict(daty, daty ktore sie pokrywają wtedy ilość ich w danym pukncie))
+            // 
+            label: "{{log.host}}",
+            data: [{% for datetime, logz in activity_hours.items %}
+                    {% if log.host == logz.host %}
+                      {{ logz.pid }},
+                    {% else %}
+                      null,
+                    {% endif %} 
+                  {% endfor %}],
+
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
-          }]
+
+
+          },{% endif %}{% endfor %}
+
+          ]
         }, 
         options: {
+          scales: {
+            x: {
+              beginAtZero: true
+            }
+          },
           animation: {
-            duration: 0,
-        }, responsive: true,
+            duration: 0, 
+        }, responsive: true,  showLine: false, spanGaps: true,
         }
       });
 
