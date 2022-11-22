@@ -1,261 +1,259 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Sono:wght@200;300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sono:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap");
 body {
-    background: linear-gradient(0deg, rgba(24,24,65,1) 0%, rgba(29,29,66,1) 58%, rgba(29,29,66,1) 100%);font-size: calc(0.24vh + 0.32vw + 6px);
-    min-height: 100vh;
-    font-family: 'Quicksand', sans-serif;
-    color: #ffffff;
-    /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg"); */
+  background: linear-gradient(
+    0deg,
+    rgba(24, 24, 65, 1) 0%,
+    rgba(29, 29, 66, 1) 58%,
+    rgba(29, 29, 66, 1) 100%
+  );
+  font-size: calc(0.24vh + 0.32vw + 6px);
+  min-height: 100vh;
+  font-family: "Quicksand", sans-serif;
+  color: #ffffff;
+  /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg"); */
 }
 .submenu {
-    width: 100%;
+  width: 100%;
 }
 .submenu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #101024;
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-    border-bottom: 2px solid #49e68a;
-    box-shadow:
-    0px 5.7px 2.3px rgba(0, 0, 0, 0.048),
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #101024;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  border-bottom: 2px solid #49e68a;
+  box-shadow: 0px 5.7px 2.3px rgba(0, 0, 0, 0.048),
     0px 12.4px 5.5px rgba(0, 0, 0, 0.056),
     0px 21.2px 10.4px rgba(0, 0, 0, 0.063),
     0px 34.4px 18.5px rgba(0, 0, 0, 0.071),
-    0px 58.2px 34.7px rgba(0, 0, 0, 0.079),
-    0px 125px 83px rgba(0, 0, 0, 0.09);
-    
-    
+    0px 58.2px 34.7px rgba(0, 0, 0, 0.079), 0px 125px 83px rgba(0, 0, 0, 0.09);
 }
-  
+
 .submenu li {
-    float: left;
+  float: left;
 }
 
 .submenu li a {
-    display: block;
-    color: rgb(255, 255, 255);
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 .submenu li a:hover {
-    /* background-color: rgb(0, 0, 0); */
-    transform: scale(1.1) translate(0.12rem, 0rem);
-    transition: 0.3s;
+  /* background-color: rgb(0, 0, 0); */
+  transform: scale(1.1) translate(0.12rem, 0rem);
+  transition: 0.3s;
 }
 
 .active {
-    background-color: #04AA6D;
+  background-color: #04aa6d;
 }
 
 .conatiner .search_container {
-    width: auto;
-    height: auto;
-    text-align:center;
+  width: auto;
+  height: auto;
+  text-align: center;
 }
 
 .search_container .prop_search {
-    float: left;
-    width: 80%;
-    text-align: left;
-    height: 100%;
-    margin: auto;
+  float: left;
+  width: 70%;
+  text-align: left;
+  height: 100%;
+  margin: auto;
 }
 
-
 .search_container .prop_search select {
-    margin: 1vw 2vh 1vw 2vh;
-    color: white;
-    background-color: #101024;
-    border-radius: 1px;
-    border: 1px solid #2d2d49
+  margin: 1vw 2vh 1vw 2vh;
+  color: white;
+  background-color: #101024;
+  border-radius: 1px;
+  border: 1px solid #2d2d49;
 }
 
 .search_container .prop_search option {
-    color: white;
-    background-color: #11112c;
+  color: white;
+  background-color: #11112c;
 }
 
 .container .search_container .global_search {
-    float: right;
-    width: 20%;
-    height: 100%;
-    margin: auto;
+  float: right;
+  width: 30%;
+  height: 100%;
+  margin: auto;
 }
 
 .container .search_container .prop_search .search_button {
-
-    background-color: #11112c; /* Green */
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    padding: 10px;
-    cursor: pointer;
+  background-color: #11112c; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px;
+  cursor: pointer;
 }
 
 .sortable {
-    width: 100%;
+  width: 100%;
 }
 
 .container .search_container input {
-    /* border-radius: 1rem; */
-    color: white;
-    padding: 0.7vw 0.5vw;
-    
-    height: 1vh;
-    width: 20vh;
+  /* border-radius: 1rem; */
+  color: white;
+  padding: 0.7vw 0.5vw;
+
+  height: 1vh;
+  width: 20vh;
 }
 
-.search_container input[type=text]:hover{
-    box-shadow: 0 0 5pt 0.5pt #000000;
+.search_container input[type="text"]:hover {
+  box-shadow: 0 0 5pt 0.5pt #000000;
 }
 
 .input-text-log {
-    background-color: #11112c;
-    border: 1px solid #2d2d49;
-    border-radius: 0.4rem;
-    cursor: auto;
-    margin: auto;
+  background-color: #11112c;
+  border: 1px solid #2d2d49;
+  border-radius: 0.4rem;
+  cursor: auto;
+  margin: auto;
 }
 
 .container {
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    padding: 1rem 2rem;
-    text-align: center;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    margin: 1.2rem auto; 
-    background-color: #11112c; 
-    height: auto;
-    width: 70vw;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 1.2rem auto;
+  background-color: #11112c;
+  height: auto;
+  width: 70vw;
 }
 
 .container table {
-    width: 100%;
+  width: 100%;
 }
 
 .header2 {
-    color: #ffffff;
-    background-color: #2d2d49;
+  color: #ffffff;
+  background-color: #2d2d49;
 }
 
 .container table td {
-    border-bottom: 1px solid #2d2d49
-
+  border-bottom: 1px solid #2d2d49;
 }
 
-td, tr {
-    padding: 5px 5px 5px 5px; /* Increase font-size */
-    border: #2d2d49;
+td,
+tr {
+  padding: 5px 5px 5px 5px; /* Increase font-size */
+  border: #2d2d49;
 }
-
 
 .graphs {
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    padding: 1rem 2rem;
-    text-align: center;
-    margin: 1.2rem auto; 
-    height: 45vh;
-    width: auto;
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr; 
-    gap: 0px 0px; 
-    grid-template-areas: 
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  margin: 1.2rem auto;
+  height: 45vh;
+  width: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
     "card1 card2 card2"
     "card1 card2 card2"
-    "card1 card2 card2"; 
+    "card1 card2 card2";
 }
 
 .graphs2 {
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    padding: 1rem 2rem;
-    text-align: center;
-    margin: 1.2rem auto; 
-    height: auto;
-    width: auto;
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr 1fr; 
-    gap: 0px 0px; 
-    grid-template-areas: 
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  margin: 1.2rem auto;
+  height: auto;
+  width: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
     "card3 card4 card5 card5"
     "card3 card4 card5 card5"
-    "card3 card4 card5 card5"; 
+    "card3 card4 card5 card5";
 }
 
 .card1 {
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    padding: 1rem 2rem;
-    margin: 1vw 1vw; 
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    background-color: #11112c; 
-    grid-area: card1;
-    height: auto;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  padding: 1rem 2rem;
+  margin: 1vw 1vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #11112c;
+  grid-area: card1;
+  height: auto;
 }
 
 .card2 {
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    padding: 1rem 2rem;
-    margin: 1vw 1vw; 
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    background-color: #11112c; 
-    grid-area: card2;
-    height: auto;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  padding: 1rem 2rem;
+  margin: 1vw 1vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #11112c;
+  grid-area: card2;
+  height: auto;
 }
 
 .card3 {
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    padding: 1rem 2rem;
-    margin: 1vw 1vw; 
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    background-color: #11112c; 
-    grid-area: card3;
-    height: auto;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  padding: 1rem 2rem;
+  margin: 1vw 1vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #11112c;
+  grid-area: card3;
+  height: auto;
 }
 
 .card4 {
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    padding: 1rem 2rem;
-    margin: 1vw 1vw; 
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    background-color: #11112c; 
-    grid-area: card4;
-    height: auto;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  padding: 1rem 2rem;
+  margin: 1vw 1vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #11112c;
+  grid-area: card4;
+  height: auto;
 }
 
 .card5 {
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    padding: 1rem 2rem;
-    margin: 1vw 1vw; 
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    background-color: #11112c; 
-    grid-area: card5;
-    height: auto;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  padding: 1rem 2rem;
+  margin: 1vw 1vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #11112c;
+  grid-area: card5;
+  height: auto;
 }
 
 .card3 table {
-    text-align: left;
-    
+  text-align: left;
 }
 
-.card3 table td, tr {
-    padding: 5px 5px 5px 5px; /* Increase font-size */
-    border: 1px solid #2d2d49
-    
+.card3 table td,
+tr {
+  padding: 5px 5px 5px 5px; /* Increase font-size */
+  border: 1px solid #2d2d49;
 }
