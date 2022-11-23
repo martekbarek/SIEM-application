@@ -29,20 +29,23 @@ SECRET_KEY = 'django-insecure-9n1#$82!mny1lxznpo$ojmaj=8^j)d3+0vrt=v_9yo+4ea0ta7
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
 # uncommend this
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'chartjs',
     
     "core.apps.CoreConfig",
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -119,9 +122,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "core/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CRISPY_TEMPLATE_PACK="bootstrap4"

@@ -1,8 +1,294 @@
+{% extends 'speedy/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load activityfilter %}
+{% load counter %}
 
-<h1>HOLA AMIGO!</h1>
+{%block title%}Dashboard{%endblock%}
+{% block content %}
+    {% csrf_token %}
+    {% include 'speedy/menu.html' %}
+    
+    <script>
+          setTimeout(() => {
+            document.location.reload();
+          }, 1200000);
 
-{% for log in all_logs %}
 
-<p>{{log.message}}</p>
+          function myFunction(){
+            // Declare variables 
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+          
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td") ; 
+              for(j=0 ; j<td.length ; j++)
+              {
+                let tdata = td[j] ;
+                if (tdata) {
+                  if (tdata.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break ; 
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                } 
+              }
+            }
+          }
+    </script> 
 
-{% endfor %}
+    
+    <div class="container" id="logs">
+      <div class="search_container">
+        <div class="prop_search">
+          <form method="get">
+            Host:<select name="host">
+              <option value="">All</option>
+              {% for host in hosts %}
+              <option value="{{host}}">{{host}}</option>
+              {% endfor %}
+            </select>
+            Facility:<select name="facility">
+              <option value="">All</option>
+              {% for facility in facilities %}
+              <option value="{{facility}}">{{facility}}</option>
+              {% endfor %}
+            </select>   
+            Time:<select name="time">
+              <option value="">All</option>
+              <option value="15">Last 15 minutes</option>
+              <option value="30">Last 30 minutes</option>
+              <option value="240">Last 4 hours</option>
+            </select>   
+            <button class="search_button" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+        <div class="global_search">
+          <input type="text" id="myInput" class="input-text-log" onkeyup="myFunction()" placeholder="Search">
+        </div>
+      </div>
+    
+            <table class="sortable">
+                <thead>
+                    <tr class="header2">
+                        <td>PID</td>
+                        <td>Message</td>
+                        <td>Program</td>
+                        <td>Facility</td>
+                        <td>Host</td>
+                        <td>Level</td>
+                        <td>Timestamp</td>
+                    </tr>
+                </thead>
+
+                <tbody id="myTable">
+                    {% for log in all_logs %}
+                        <tr>
+                            <td>{{log.pid}}</td>
+                            <td>{{log.message}}</td>
+                            <td>{{log.program}}</td>
+                            <td>{{log.facility}}</td>
+                            <td>{{log.host}}</td>
+                            <td>{{log.level}}</td>
+                            <td>{{log.datetime}}</td>
+                        </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+
+    <div class="graphs">
+      <div class="card1"> <h4>Events based on host</h4> <canvas id="barChart"></canvas></div>
+      
+      <div class="card2"><h3>Activity line chart</h3><canvas id="lineChart"></canvas></div>
+    </div>
+
+    <div class="graphs2">
+      <div class="card3">
+        
+        <h3>Incidents</h3> 
+        <table class="sortable">
+          <thead>
+              <tr class="header2">
+                  <td>Urgency</td>
+                  <td>Host</td>
+                  <td>Facility</td>
+                  <td>Message</td>
+              </tr>
+          </thead>
+
+          <tbody id="myTable">
+              {% for inc in incidents %}
+             
+                  <tr>
+                  {% comment %} <tr style="background-color: {% if inc.level == 'local0' %}#a1070275{% elif inc.level == 'local1' %}#610f7f49{% elif inc.level == 'local2' %}#ec9b2973{% elif inc.level == 'local3' %}#ec9b2973{% endif %}"> {% endcomment %}
+                    {% comment %} add href to full, and create asset view {% endcomment %}
+                      <td>{% if inc.level == 'local0' %}!!!!{% elif inc.level == 'local1' %}!!!{% elif inc.level == 'local2' %}!!{% elif inc.level == 'local3' %}!{% endif %}</td>
+                      <td>{{inc.host}}</td>
+                      <td>{{inc.facility}}</td>
+                      <td>{{inc.message}}</td>
+                     
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      </div>
+
+
+      <div class="card4"><h3>Events based on facility</h3><canvas id="doughnutChart"></canvas></div>
+      <div class="card5"> 
+        <h3>Last active host</h3>
+        <table class="tab sortable" style="text-align: left">
+          <thead>
+              <tr class="header2">
+                  {% comment %} <td></td> {% endcomment %}
+                  <td>Name</td>
+                  <td>IP</td>
+                  <td>Last activity</td>
+              </tr>
+          </thead>
+          <tbody id="myTable">
+              {% for host,log in last_activity_dict.items %}
+                  <tr>
+                      {% comment %} <td>{% if log.datetime|activityfilter:10 %}<h5>inactive for less than 10 minutes</h5>{% elif log.datetime|activityfilter:120 %}<h5>inactive for less than 2 hours</h5>{% elif log.datetime|activityfilter:240 %}<h5>inactive for less than 4 hours</h5>{% else %}<h10>inactive for more than 4 hours</h10>{% endif %}</td> {% endcomment %}
+                      <td >{% if log.datetime|activityfilter:10 %}<span>&#128994;</span>{% elif log.datetime|activityfilter:120 %}<span>&#128993;</span>{% else %}<span>&#128308;</span>{% endif %}{{host}}</td>
+                      <td>{{log.pid}}</td>
+                      <td>{{log.datetime|timesince}} ago</td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+    <script src="{% static 'chart.js' %}"></script>
+    <script>
+      const barChart = document.getElementById('barChart');
+    
+      new Chart(barChart, {
+        type: 'bar',
+        data: {
+          labels: [{% for host,value in host_counter_dict.items %} "{{host}}", {% endfor %}],
+          datasets: [{
+            label: ['Events'],
+            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+            data: [{% for host,value in host_counter_dict.items %} "{{value}}", {% endfor %}],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: ''
+                }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }, animation: {
+            duration: 0,
+        }, responsive: true,
+        }
+
+      });
+    </script>
+
+    <script>
+      const doughnutChart = document.getElementById('doughnutChart');
+    
+      new Chart(doughnutChart, {
+        type: 'doughnut',
+        data: {
+          labels: [{% for host,value in fac_counter_dict.items %} "{{host}}", {% endfor %}],
+          datasets: [{
+            label: '',
+            backgroundColor: ["#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+            data: [{% for host,value in fac_counter_dict.items %} "{{value}}", {% endfor %}],
+            hoverOffset: 4,
+            borderWidth: 0
+          }]
+        },
+        options: {
+          animation: {
+            duration: 0,
+        }, responsive: true,
+        }
+      });
+    </script>
+
+
+    <script src="{% static 'utils.js' %}"></script>
+    <script>
+      const Utils = ChartUtils.init();
+      const lineChart = document.getElementById('lineChart');
+      // create filter that will receive x hours back from last event
+      const labels = [{% for datetime, log in activity_hours.items %} "{{datetime|date:'M d - H:i'}}", {% endfor %}];
+
+      new Chart(lineChart, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{ 
+            
+            label: "Activity",
+            data: [{% for datetime, log_table in activity_hours.items %}
+                    {% if log_table %} 
+                      {{ log_table|counter }},
+                    {% else %}
+                    ,
+                    {% endif %}
+                  {% endfor %}],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+
+          }]
+        }, 
+        options: {
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: ''
+                }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true
+            }
+          },
+          animation: {
+            duration: 0, 
+        }, responsive: true, showLine: false, aspectRatio:2|3 ,spanGaps: false, fill: true, pointBackgroundColor: 'rgb(75, 192, 192)',
+        }
+      });
+
+    </script>
+    
+
+{% comment %} <script type="text/javascript"> 
+    window.onload = function() {
+        if (window.jQuery) {
+            alert('jQuery is loaded');
+        } else {
+            alert('jQuery is not loaded');
+        }
+    }
+</script> {% endcomment %}
+
+{% endblock %}
+
+
+
