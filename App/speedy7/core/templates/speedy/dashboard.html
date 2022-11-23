@@ -2,6 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load activityfilter %}
+{% load counter %}
 
 {%block title%}Dashboard{%endblock%}
 {% block content %}
@@ -230,28 +231,21 @@
         type: 'line',
         data: {
           labels: labels,
-          datasets: [{% for datetime, log in activity_hours.items %}{% if log.host %}{ 
+          datasets: [{ 
             
-            // tutaj funkcja in i bedzie
-            // dict (nazwahosta,dict(daty, daty ktore sie pokrywają wtedy ilość ich w danym pukncie))
-            // 
-            label: "{{log.host}}",
-            data: [{% for datetime, logz in activity_hours.items %}
-                    {% if log.host == logz.host %}
-                      {{ logz.pid }},
+            label: "Activity",
+            data: [{% for datetime, log_table in activity_hours.items %}
+                    {% if log_table %} 
+                      {{ log_table|counter }},
                     {% else %}
-                      null,
-                    {% endif %} 
+                    ,
+                    {% endif %}
                   {% endfor %}],
-
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
 
-
-          },{% endif %}{% endfor %}
-
-          ]
+          }]
         }, 
         options: {
           scales: {
@@ -261,7 +255,7 @@
           },
           animation: {
             duration: 0, 
-        }, responsive: true,  showLine: false, spanGaps: true,
+        }, responsive: true,  showLine: false, spanGaps: false, pointBackgroundColor: 'rgb(75, 192, 192)',
         }
       });
 

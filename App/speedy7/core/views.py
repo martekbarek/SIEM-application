@@ -62,13 +62,13 @@ def dashboard(response):
                         for x in range(12)))
 
     
-    activity_hours = dict(zip(chart_hours, [None]*len(chart_hours)))
+    activity_hours = dict(zip(chart_hours, [tuple()]*len(chart_hours)))
     
     # it is possible to check activity based on last event and then strftime when not today
    
     for log in all_logs :
         if (time:=log.datetime.replace(minute=(30 if log.datetime.minute > 30 else 0), second=0, microsecond=0)) in chart_hours:
-            activity_hours[time]=log
+            activity_hours[time]+=(log,)
 
 
     context = {"all_logs": filteredLogs, "facilities": facilities,
