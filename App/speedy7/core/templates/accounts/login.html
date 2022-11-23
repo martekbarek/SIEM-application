@@ -1,0 +1,26 @@
+{% extends 'speedy/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{%block title%}Login{%endblock%}
+{% block content %}
+    <div class="container login">
+        <h1>Speedy7</h1>
+        <hr style="border: 1px solid #2d2d49;"></hr>
+        <form method="POST">
+            {% csrf_token %}
+            Username
+            <input type="text" name="username" placeholder="Username" class=""></input>
+            Password
+            <input type="password" name="password" placeholder="Password" class=""></input>
+
+            <input type="submit" name="Log in">
+        </form>
+
+        {% for message in messages %}
+            <p id="messages">{{message}}</p>
+        {% endfor %}
+
+        <p>Don't have an account? <a href="{% url 'speedy:registerPage' %}">Register</a>.</p>
+    </div>
+{% endblock %}

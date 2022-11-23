@@ -1,12 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Log
 from .filters import LogFilter
 from dateutil import tz
 from datetime import datetime,timedelta
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout 
+from .forms import *
 from .templatetags.activityfilter import activityfilter
 
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/')
 def dashboard(response):
 
     all_logs_query = Log.objects.order_by('-datetime').all
@@ -72,3 +78,48 @@ def dashboard(response):
                "myFilter": logFilter}
 
     return render(response, 'speedy/dashboard.html', context)
+
+
+def registerPage(request):
+    
+    if request.user.is_authenticated:
+        return redirect('dashboard/')
+
+    form = RegisterForm()
+    
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, "Account was created for " + user)
+
+            return redirect('/')
+
+    context = {'form':form}
+    return render(request, 'accounts/register.html', context=context)
+
+def loginPage(request):
+
+    if request.user.is_authenticated:
+        return redirect('dashboard/')
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard/')
+        else:
+            messages.info(request, 'Username OR password is incorrect')
+        
+    context = {}
+    return render(request, 'accounts/login.html', context=context)
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('/')

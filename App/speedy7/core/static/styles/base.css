@@ -130,7 +130,6 @@ body {
   border-radius: 0.4rem;
   font-size: 0.8rem;
   padding: 1rem 2rem;
-  text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 1.2rem auto;
   background-color: #11112c;
@@ -140,6 +139,7 @@ body {
 
 .container table {
   width: 100%;
+  text-align: center;
 }
 
 .header2 {
@@ -256,4 +256,32 @@ tr {
 tr {
   padding: 5px 5px 5px 5px; /* Increase font-size */
   border: 1px solid #2d2d49;
+}
+
+.login {
+  /* margin-top: 50vh; */
+  margin: 0rem auto;
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.login h1 {
+  
+  text-align: center;
+}
+
+
+.login input[type=text],input[type=password] {
+  text-align: left;
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px auto;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }

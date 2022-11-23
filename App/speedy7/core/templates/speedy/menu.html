@@ -1,11 +1,13 @@
 <div id="menu">
     <div class="submenu">
         <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Dashboard</a></li>
+            <li><a href="{% url 'speedy:loginPage' %}">Home</a></li>
+            <li><a href="{% url 'speedy:dashboard' %}">Dashboard</a></li>
             <li><a href="">Users</a></li>
             <li><a href="">Help</a></li>
-        </ul>
+            <li style="float:right"><a href="{% url 'speedy:logoutUser' %}">Logout</a></li>
+            <li style="float:right"><a>{{request.user}}</a></li>
+        </ul>   
         {% comment %} {% for link in menu.links %}
         <a
         href="{{link.url}}"
