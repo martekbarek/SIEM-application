@@ -5,6 +5,7 @@ from .filters import LogFilter
 from dateutil import tz
 from datetime import datetime,timedelta
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout 
 from .forms import *
@@ -13,7 +14,7 @@ from .templatetags.activityfilter import activityfilter
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/')
-def dashboard(response):
+def dashboard(request):
 
     all_logs_query = Log.objects.order_by('-datetime').all
     all_logs = all_logs_query()
@@ -50,10 +51,10 @@ def dashboard(response):
     # filter urgent logs
     incidents = tuple(log for log in Log.objects.order_by(
         'level') if int(log.level[-1]) <= 3)
-    logFilter = LogFilter(response.GET, queryset=all_logs)
+    logFilter = LogFilter(request.GET, queryset=all_logs)
     filteredLogs = logFilter.qs
 
-    if 'time' in (req := response.GET) and req['time'] != '':
+    if 'time' in (req := request.GET) and req['time'] != '':
         minutes = req['time']
         filteredLogs = tuple(filter(lambda x: activityfilter(
             x.datetime, int(minutes)), filteredLogs))
@@ -77,7 +78,21 @@ def dashboard(response):
                "last_activity_dict": sorted_last_activity_dict,
                "myFilter": logFilter}
 
-    return render(response, 'speedy/dashboard.html', context)
+    return render(request, 'speedy/dashboard.html', context)
+
+@login_required(login_url='/')
+def users(request):
+    users = User.objects.all()
+    context = {'users':users}
+    return render(request, 'accounts/users.html',context)
+    
+@login_required(login_url='/')
+def assets(request):
+    all_logs = Log.objects.all()
+    hosts = set(item.host for item in all_logs)
+    context = {'hosts':hosts}
+    return render(request, 'speedy/assets.html',context)
+    
 
 
 def registerPage(request):

@@ -6,8 +6,7 @@
 
 {%block title%}Dashboard{%endblock%}
 {% block content %}
-    {% csrf_token %}
-    {% include 'speedy/menu.html' %}
+{% include 'speedy/menu.html' %}
     
     <script>
           setTimeout(() => {
@@ -129,7 +128,7 @@
                   <tr>
                   {% comment %} <tr style="background-color: {% if inc.level == 'local0' %}#a1070275{% elif inc.level == 'local1' %}#610f7f49{% elif inc.level == 'local2' %}#ec9b2973{% elif inc.level == 'local3' %}#ec9b2973{% endif %}"> {% endcomment %}
                     {% comment %} add href to full, and create asset view {% endcomment %}
-                      <td>{% if inc.level == 'local0' %}!!!!{% elif inc.level == 'local1' %}!!!{% elif inc.level == 'local2' %}!!{% elif inc.level == 'local3' %}!{% endif %}</td>
+                      <td style="text-align: center; color: red;">{% if inc.level == 'local0' %}<span>&#9888;&#9888;&#9888;&#9888;</span>{% elif inc.level == 'local1' %}&#9888;&#9888;&#9888;{% elif inc.level == 'local2' %}&#9888;&#9888;{% elif inc.level == 'local3' %}&#9888;{% endif %}</td>
                       <td>{{inc.host}}</td>
                       <td>{{inc.facility}}</td>
                       <td>{{inc.message}}</td>
@@ -154,10 +153,16 @@
               </tr>
           </thead>
           <tbody id="myTable">
-              {% for host,log in last_activity_dict.items %}
+              {% for host, log in last_activity_dict.items %}
                   <tr>
-                      {% comment %} <td>{% if log.datetime|activityfilter:10 %}<h5>inactive for less than 10 minutes</h5>{% elif log.datetime|activityfilter:120 %}<h5>inactive for less than 2 hours</h5>{% elif log.datetime|activityfilter:240 %}<h5>inactive for less than 4 hours</h5>{% else %}<h10>inactive for more than 4 hours</h10>{% endif %}</td> {% endcomment %}
-                      <td >{% if log.datetime|activityfilter:10 %}<span>&#128994;</span>{% elif log.datetime|activityfilter:120 %}<span>&#128993;</span>{% else %}<span>&#128308;</span>{% endif %}{{host}}</td>
+                      <td>{% if log.datetime|activityfilter:10 %}
+                            <span>&#128994;</span>
+                          {% elif log.datetime|activityfilter:120 %}
+                            <span>&#128993;</span>
+                          {% else %}
+                            <span>&#128308;</span>
+                          {% endif %}{{host}}
+                      </td>
                       <td>{{log.pid}}</td>
                       <td>{{log.datetime|timesince}} ago</td>
                   </tr>
