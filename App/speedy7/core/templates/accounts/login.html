@@ -5,7 +5,13 @@
 {%block title%}Login{%endblock%}
 {% block content %}
     <div class="container login">
+        <br>
+        <br>
         <h1>Speedy7</h1>
+        <br>
+        <br>
+        <br>
+        <h5>Login</h5>
         <hr style="border: 1px solid #2d2d49;"></hr>
         <form method="POST">
             {% csrf_token %}
@@ -13,8 +19,7 @@
             <input type="text" name="username" placeholder="Username" class=""></input>
             Password
             <input type="password" name="password" placeholder="Password" class=""></input>
-
-            <input type="submit" name="Log in">
+            <input type="submit" name="login" value="Log in">
         </form>
 
         {% for message in messages %}

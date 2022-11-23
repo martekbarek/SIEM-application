@@ -22,6 +22,7 @@
                     <td>Date Joined</td>
                     <td></td>
                     <td></td>
+                    <td></td>
                 </tr>
             </thead>
 
@@ -36,10 +37,11 @@
                         <td>{% if user.is_superuser %}<span>&#x2713;</span>{% else %}<span>&#x2717;</span>{% endif %}</td>
                         <td>{{user.first_name}}</td>
                         <td>{{user.last_name}}</td>
-                        <td>{% if user.is_active %}<span>&#128308;</span>{% else %}<span>&#128994;</span>{% endif %}</td>
+                        <td>{% if user.is_active %}<span>&#128994;</span>{% else %}<span>&#128308;</span>{% endif %}</td>
                         <td>{{user.date_joined}}</td>
                         <td><a href="">Edit</a></td>
                         <td><a href="">Delete</a></td>
+                        <td><a href="">Deactive</a></td>
                     </tr>
 
                 {% endfor %}

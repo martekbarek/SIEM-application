@@ -4,21 +4,29 @@
 
 {%block title%}Register{%endblock%}
 {% block content %}
-    <div class="container">
-    <form method="POST" action="">
-        
-            {% csrf_token %}
-            {{ form|crispy }}
-{% comment %} 
-            {{form.username.label}}
-            {{form.username}} {% endcomment %}
-
-            
+    <div class="container login">
+        <br>
+        <br>
+        <h1>Speedy7</h1>
+        <br>
+        <br>
+        <br>
+        <h5>Register</h5>
+        <hr style="border: 1px solid #2d2d49;"></hr>
+        <form method="POST" action="">  
+            {% csrf_token %} 
+            Username
+            <input type="text" name="username" placeholder="Username" class=""></input>
+            Email address
+            <input type="text" name="email" placeholder="email" class=""></input>
+            Password
+            <input type="password" name="password1" placeholder="Password" class=""></input>
+            Confirm password
+            <input type="password" name="password2" placeholder="Password" class=""></input>
             {{form.errors}}
-            <input type="submit" name="Create User">
+            <input type="submit" name="register" value="Create User">
         </form>
         
-
         <p>Already have an account? <a href="{% url 'speedy:loginPage' %}">Login</a>.</p>
     </div>
 

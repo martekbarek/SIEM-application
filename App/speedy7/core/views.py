@@ -92,7 +92,12 @@ def assets(request):
     hosts = set(item.host for item in all_logs)
     context = {'hosts':hosts}
     return render(request, 'speedy/assets.html',context)
-    
+
+@login_required(login_url='/')
+def help(request):
+   
+    context = {}
+    return render(request, 'speedy/help.html',context) 
 
 
 def registerPage(request):
