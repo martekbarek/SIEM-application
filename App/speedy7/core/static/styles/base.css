@@ -163,7 +163,7 @@ tr {
   padding: 1rem 2rem;
   text-align: center;
   margin: 1.2rem auto;
-  height: 45vh;
+  height: auto;
   width: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

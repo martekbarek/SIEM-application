@@ -106,7 +106,7 @@
     <div class="graphs">
       <div class="card1"> <h4>Events based on host</h4> <canvas id="barChart"></canvas></div>
       
-      <div class="card2"> <canvas id="scatterChart"></canvas></div>
+      <div class="card2"><h3>Activity line chart</h3><canvas id="lineChart"></canvas></div>
     </div>
 
     <div class="graphs2">
@@ -141,7 +141,7 @@
       </div>
 
 
-      <div class="card4"> <canvas id="doughnutChart"></canvas></div>
+      <div class="card4"><h3>Events based on facility</h3><canvas id="doughnutChart"></canvas></div>
       <div class="card5"> 
         <h3>Last active host</h3>
         <table class="tab sortable" style="text-align: left">
@@ -184,6 +184,14 @@
           }]
         },
         options: {
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: ''
+                }
+            }
+          },
           scales: {
             y: {
               beginAtZero: true
@@ -223,11 +231,11 @@
     <script src="{% static 'utils.js' %}"></script>
     <script>
       const Utils = ChartUtils.init();
-      const lineChart = document.getElementById('scatterChart');
+      const lineChart = document.getElementById('lineChart');
       // create filter that will receive x hours back from last event
-      const labels = [{% for datetime, log in activity_hours.items %} "{{datetime}}", {% endfor %}];
+      const labels = [{% for datetime, log in activity_hours.items %} "{{datetime|date:'M d - H:i'}}", {% endfor %}];
 
-      new Chart(scatterChart, {
+      new Chart(lineChart, {
         type: 'line',
         data: {
           labels: labels,
@@ -248,6 +256,14 @@
           }]
         }, 
         options: {
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: ''
+                }
+            }
+          },
           scales: {
             x: {
               beginAtZero: true
@@ -255,7 +271,7 @@
           },
           animation: {
             duration: 0, 
-        }, responsive: true,  showLine: false, spanGaps: false, pointBackgroundColor: 'rgb(75, 192, 192)',
+        }, responsive: true, showLine: false, aspectRatio:2|3 ,spanGaps: false, fill: true, pointBackgroundColor: 'rgb(75, 192, 192)',
         }
       });
 

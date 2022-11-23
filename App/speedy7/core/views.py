@@ -6,8 +6,6 @@ from dateutil import tz
 from datetime import datetime,timedelta
 from .templatetags.activityfilter import activityfilter
 
-# Create your views here.
-
 
 def dashboard(response):
 
@@ -54,18 +52,11 @@ def dashboard(response):
         filteredLogs = tuple(filter(lambda x: activityfilter(
             x.datetime, int(minutes)), filteredLogs))
 
-    #
-    # last_activity = list(sorted_last_activity_dict.values())[0].datetime
 
-   
-    chart_hours = sorted(tuple((datetime.now(tz=tz.gettz("UTC")).replace(minute=0, second=0, microsecond=0) - timedelta(minutes=x*30)) 
-                        for x in range(12)))
-
-    
+    # prepare timechart values
+    now = (n:=datetime.now(tz=tz.gettz("UTC"))).replace(minute=(30 if n.minute > 30 else 0), second=0, microsecond=0)
+    chart_hours = sorted(tuple(((now - timedelta(minutes=(x-2)*30)) for x in range(24))))
     activity_hours = dict(zip(chart_hours, [tuple()]*len(chart_hours)))
-    
-    # it is possible to check activity based on last event and then strftime when not today
-   
     for log in all_logs :
         if (time:=log.datetime.replace(minute=(30 if log.datetime.minute > 30 else 0), second=0, microsecond=0)) in chart_hours:
             activity_hours[time]+=(log,)
@@ -76,7 +67,6 @@ def dashboard(response):
                "host_counter_dict": host_counter_dict,
                "fac_counter_dict": fac_counter_dict,
                "incidents": incidents,
-               "chart_hours": chart_hours,
                "activity_hours": activity_hours,
                "last_activity_dict": sorted_last_activity_dict,
                "myFilter": logFilter}
