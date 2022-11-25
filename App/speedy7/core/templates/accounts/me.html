@@ -1,0 +1,32 @@
+{% extends 'speedy/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{%block title%}Users{%endblock%}
+{% block content %}
+{% include 'speedy/menu.html' %}
+
+    <div class="container">
+        <h1 style="text-align: center">Hello, {{user.username}}!</h1>
+        <br>
+        <br>
+       
+                    <h3><p>Id: {{user.id}}</p></h3>
+                    <h3><p>Username: {{user.username}}</p></h3>
+                    <h3><p>Email: {{user.email}}</p></h3>
+                    <h3><p>Last login:  {% if user.last_login %}{{user.last_login}}{% else %}Never{% endif %}</p></h3>
+                    <h3><p>Staff: {{ user.is_staff|yesno }}</p></h3>
+                    <h3><p>Superuser: {{user.is_superuser|yesno}}</p></h3>
+                    <h3><p>First Name: {{user.first_name}}</p></h3>
+                    <h3><p>Last name: {{user.last_name}}</p></h3>
+                    <h3><p>Active: {{user.is_active|yesno}} </p></h3>
+                    <h3><p>Date joined: {{user.date_joined}}</p></h3>
+                   
+                    {% comment %} <a href="{% url 'speedy:deleteUser' id=user.id %}">Delete</a>
+                    <a href="{% url 'speedy:editUser' id=user.id %}">Edit</a> {% endcomment %}
+                    
+            
+            
+    
+    </div>
+{% endblock %}

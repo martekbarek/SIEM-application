@@ -13,6 +13,7 @@ urlpatterns = [
     path('logout/', views.logoutUser, name='logoutUser'),
     
     path('users/', views.users, name='users'),
+    path('user/', views.userView, name='userView'),
     path('user/edit/<int:id>', views.editUser, name='editUser'),
     path('user/delete/<int:id>', views.deleteUser, name='deleteUser'),
     path('user/password/change', views.changePass, name='changePass'),

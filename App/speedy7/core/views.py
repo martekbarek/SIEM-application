@@ -148,9 +148,30 @@ def loginPage(request):
     return render(request, 'accounts/login.html', context=context)
 
 @login_required(login_url='/')
+def userView(request):
+    user = User.objects.get(pk=request.user.id)
+    context = {'user':user}
+    return render(request, 'accounts/me.html', context=context)
+
+@login_required(login_url='/')
 def editUser(request,id):
     return redirect('/admin/auth/user/%s/change/' % (id,))
     
+@login_required(login_url='/')
+def deleteUser(request,id):
+    return redirect('/admin/auth/user/%s/delete/' % (id,))
+
+@login_required(login_url='/')
+def changePass(request):
+    id = request.user.id
+    return redirect('/admin/auth/user/%s/password/' % (id,))
+
+@login_required(login_url='/')
+def logoutUser(request):
+    logout(request)
+    return redirect('/')
+
+
     # user = User.objects.get(pk=id)
     # userToEdit = EditUserForm(instance = user)
 
@@ -166,17 +187,3 @@ def editUser(request,id):
     # context = {'form':userToEdit}
     
     # return render(request, 'accounts/edit.html', context=context)
-
-@login_required(login_url='/')
-def deleteUser(request,id):
-    return redirect('/admin/auth/user/%s/delete/' % (id,))
-
-@login_required(login_url='/')
-def changePass(request):
-    id = request.user.id
-    return redirect('/admin/auth/user/%s/password/' % (id,))
-
-@login_required(login_url='/')
-def logoutUser(request):
-    logout(request)
-    return redirect('/')

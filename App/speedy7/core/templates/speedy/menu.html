@@ -13,7 +13,7 @@
             {% if request.user.is_superuser %}
                 <li style="float:right"><a href="{% url 'speedy:changePass' %}">Change password</a></li>
             {% endif %}
-            <li style="float:right"><a>You are logged as {{request.user}}</a></li>
+            <li style="float:right"><a href="{% url 'speedy:userView' %}">You are logged as {{request.user}}</a></li>
         </ul>   
         {% comment %} {% for link in menu.links %}
         <a
