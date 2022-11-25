@@ -1,8 +1,10 @@
-asgiref==3.5.0
-Django==4.0.4
-django-filter
-django-chartjs
-django-crispy-forms
+asgiref==3.5.2
+Django==4.0.6
+django-filter==22.1
+django-chartjs==2.3.0
+django-crispy-forms==1.14.0
 sqlparse==0.4.2
 psycopg2-binary==2.9.3
 django-postgres-extensions==0.9.3
+python-dateutil==2.8.2
+pytz==2022.1

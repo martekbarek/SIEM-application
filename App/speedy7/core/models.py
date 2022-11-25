@@ -11,9 +11,9 @@ class Log(models.Model):
     message = models.CharField(max_length=255, blank=True, null=True)
     # status = models.PositiveSmallIntegerField(choices=Status.choices)
 
-    # class Meta:
-        # managed = False
-        # db_table = 'log'
+    class Meta:
+        managed = False
+        db_table = 'log'
 
     
     # class Status(models.IntegerChoices):

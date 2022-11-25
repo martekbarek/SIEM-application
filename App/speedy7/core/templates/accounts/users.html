@@ -7,6 +7,9 @@
 {% include 'speedy/menu.html' %}
 
     <div class="container">
+        <h1 style="text-align: center">User manager</h1>
+        <br>
+        <br>
         <table class="sortable">
             <thead>
                 <tr class="header2">
@@ -22,7 +25,7 @@
                     <td>Date Joined</td>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    {% comment %} <td></td> {% endcomment %}
                 </tr>
             </thead>
 
@@ -39,9 +42,9 @@
                         <td>{{user.last_name}}</td>
                         <td>{% if user.is_active %}<span>&#128994;</span>{% else %}<span>&#128308;</span>{% endif %}</td>
                         <td>{{user.date_joined}}</td>
-                        <td><a href="">Edit</a></td>
-                        <td><a href="">Delete</a></td>
-                        <td><a href="">Deactive</a></td>
+                        <td><a href="{% url 'speedy:editUser' id=user.id %}">Edit</a></td>
+                        <td><a href="{% url 'speedy:deleteUser' id=user.id %}">Delete</a></td>
+                        {% comment %} <td><a href="">Deactive</a></td> {% endcomment %}
                     </tr>
 
                 {% endfor %}

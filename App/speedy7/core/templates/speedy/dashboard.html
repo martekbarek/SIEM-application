@@ -11,7 +11,7 @@
     <script>
           setTimeout(() => {
             document.location.reload();
-          }, 1200000);
+          }, 60000);
 
 
           function myFunction(){
@@ -116,9 +116,11 @@
           <thead>
               <tr class="header2">
                   <td>Urgency</td>
+                  <td>Level</td>
                   <td>Host</td>
                   <td>Facility</td>
                   <td>Message</td>
+                  <td>Description</td>
               </tr>
           </thead>
 
@@ -128,10 +130,12 @@
                   <tr>
                   {% comment %} <tr style="background-color: {% if inc.level == 'local0' %}#a1070275{% elif inc.level == 'local1' %}#610f7f49{% elif inc.level == 'local2' %}#ec9b2973{% elif inc.level == 'local3' %}#ec9b2973{% endif %}"> {% endcomment %}
                     {% comment %} add href to full, and create asset view {% endcomment %}
-                      <td style="text-align: center; color: red;">{% if inc.level == 'local0' %}<span>&#9888;&#9888;&#9888;&#9888;</span>{% elif inc.level == 'local1' %}&#9888;&#9888;&#9888;{% elif inc.level == 'local2' %}&#9888;&#9888;{% elif inc.level == 'local3' %}&#9888;{% endif %}</td>
+                      <td style="text-align: center; color: red;">{% if inc.level == 'emerg' %}<span>&#9888;&#9888;&#9888;&#9888;</span>{% elif inc.level == 'alert' %}&#9888;&#9888;&#9888;{% elif inc.level == 'crit' %}&#9888;&#9888;{% elif inc.level == 'err' %}&#9888;{% endif %}</td>
+                      <td>{{inc.level}}</td>
                       <td>{{inc.host}}</td>
                       <td>{{inc.facility}}</td>
                       <td>{{inc.message}}</td>
+                      <td></td>
                      
                   </tr>
               {% endfor %}
@@ -254,7 +258,7 @@
                     ,
                     {% endif %}
                   {% endfor %}],
-            fill: false,
+            fill: true,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
 
@@ -276,7 +280,7 @@
           },
           animation: {
             duration: 3000, 
-        }, responsive: true, showLine: false, aspectRatio:2|3 ,spanGaps: false, fill: true, pointBackgroundColor: 'rgb(75, 192, 192)',
+        }, responsive: true, showLine: true, aspectRatio:2|3 ,spanGaps: false, fill: true, pointBackgroundColor: 'rgb(75, 192, 192)',
         }
       });
 

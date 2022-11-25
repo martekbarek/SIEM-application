@@ -13,7 +13,7 @@ services:
       lil-network:
         ipv4_address: 172.23.0.3
     depends_on:
-      - db
+      - web
 
   client:
     build: ./Client
@@ -23,6 +23,7 @@ services:
     networks:
       lil-network:
         ipv4_address: 172.23.0.2
+ 
 
   db:
     restart: always
@@ -61,7 +62,7 @@ services:
       - db
     networks:
       lil-network:
-
+        ipv4_address: 172.23.0.5
   # pgadmin:
   #   image: dpage/pgadmin4
   #   container_name: demo-pgadmin
