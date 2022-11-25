@@ -15,20 +15,23 @@
                 <tr class="header2">
                     <td>Name</td>
                     <td>Last Activity</td>
-                    <td>Is online</td>
-                    <td>Facility</td>
+                    <td>Events</td>
+                    <td></td>
                     
                 </tr>
             </thead>
 
             <tbody id="myTable">
-                {% for host in hosts %}
+                {% for name,info in hosts.items %}
                     <tr>
-                        <td>{{host}}</td>
-                        <td>{{host}}</td>
-                        <td>{{host}}</td>
-                        <td>{{host}}</td>
-                       
+                        <td>{{name}}</td>
+                        <td>{{info.0}}</td>
+                        <td>{{info.1}}</td>
+                        <form id="connectivity_check" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="host" value="{{name}}" /> 
+                            <td><a href="#" onclick="submitFunction()">Check if online</a></td>
+                        </form>
                     </tr>
                 
                 {% endfor %}
@@ -36,4 +39,14 @@
         </table>
     
     </div>
+
+    <script>
+
+        function submitFunction() {
+            document.getElementById("connectivity_check").submit();
+        }
+    </script>
+
+    
+
 {% endblock %}

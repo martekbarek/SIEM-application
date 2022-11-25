@@ -4,6 +4,7 @@ from .models import Log
 from .filters import LogFilter
 from dateutil import tz
 import logging
+import os
 from datetime import datetime,timedelta
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -96,10 +97,29 @@ def users(request):
     
 @login_required(login_url='/')
 def assets(request):
+
     all_logs = Log.objects.all()
     hosts = set(item.host for item in all_logs)
-    context = {'hosts':hosts}
+    
+    host_info_dict = {}
+    # host_counter_dict = {}
+    for name in hosts:
+        last_activity = var if (var:=Log.objects.order_by('-datetime').filter(host=name).first().datetime) else None
+        counter = 0
+        for log in all_logs:
+            if name in log.host:
+                counter += 1
+        host_info_dict[name]=(last_activity,counter)
+
+    if request.method == "POST":
+        hostname = request.POST.get('host')
+        is_online = True if os.system("ping -c 1 " + hostname) == 0 else False
+        context = {'host':hostname,'hosts':host_info_dict, 'is_online':is_online}
+        return render(request, 'speedy/assets.html',context)
+     
+    context = {'hosts':host_info_dict}
     return render(request, 'speedy/assets.html',context)
+
 
 @login_required(login_url='/')
 def help(request):
