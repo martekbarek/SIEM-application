@@ -29,8 +29,8 @@ SECRET_KEY = 'django-insecure-9n1#$82!mny1lxznpo$ojmaj=8^j)d3+0vrt=v_9yo+4ea0ta7
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
 # uncommend this
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
