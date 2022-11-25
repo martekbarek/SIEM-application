@@ -49,6 +49,8 @@ def dashboard(request):
         sorted_last_activity_dict = dict(sorted(last_activity_dict.items(), key=lambda x : x[1].datetime, reverse=True))
 
         
+        # tz = pytz.timezone("Europe/Warsaw")  -  set proper time zone
+
         # filter urgent logs
         incidents = tuple(log for log in Log.objects.order_by(
             'level') if (log.level in ['emerg','alert','crit','err'] ))
@@ -81,7 +83,7 @@ def dashboard(request):
 
         
         return render(request, 'speedy/dashboard.html', context)
-    except:
+    except Exception:
         logging.info('No messages')
         return render(request, 'speedy/dashboard.html', {})
         
