@@ -295,3 +295,9 @@ tr {
   display: inline-block;
   font-size: 16px;
 }
+
+.errorlist li {
+  color: red;
+  display: inline-block;
+  list-style-type: none;
+}

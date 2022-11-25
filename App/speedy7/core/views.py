@@ -147,7 +147,7 @@ def loginPage(request):
     context = {}
     return render(request, 'accounts/login.html', context=context)
 
-
+@login_required(login_url='/')
 def editUser(request,id):
     return redirect('/admin/auth/user/%s/change/' % (id,))
     
@@ -167,12 +167,16 @@ def editUser(request,id):
     
     # return render(request, 'accounts/edit.html', context=context)
 
-
+@login_required(login_url='/')
 def deleteUser(request,id):
     return redirect('/admin/auth/user/%s/delete/' % (id,))
 
+@login_required(login_url='/')
+def changePass(request):
+    id = request.user.id
+    return redirect('/admin/auth/user/%s/password/' % (id,))
 
-
+@login_required(login_url='/')
 def logoutUser(request):
     logout(request)
     return redirect('/')

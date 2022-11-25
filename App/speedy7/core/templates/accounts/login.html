@@ -23,7 +23,7 @@
         </form>
 
         {% for message in messages %}
-            <p id="messages">{{message}}</p>
+            <p style="color: red" id="messages">{{message}}</p>
         {% endfor %}
 
         <p>Don't have an account? <a href="{% url 'speedy:registerPage' %}">Register</a>.</p>
