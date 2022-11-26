@@ -351,3 +351,33 @@ tr {
 ::-webkit-scrollbar-thumb:hover {
   background: #1f1f38;
 }
+
+
+
+/* ************************************************  */
+/* ***************** FOOTER ***********************  */
+/* ************************************************  */
+
+.footer {
+  position: static;
+  left: 0;
+  display: block;
+  bottom: 0;
+  width: 100%;
+  color: rgb(172, 172, 172);
+  height: 90px;
+  
+}
+.footer1 {
+  background-color: #2c8f55;
+  height: 30px;
+}
+.footer2 {
+  background-color: #20663d;
+  height: 90px;
+}
+
+.footer2 p {
+  padding: 30px 60px 0px 30px;
+  text-align: right;
+}
