@@ -17,7 +17,7 @@
           function myFunction(){
             // Declare variables 
             var input, filter, table, tr, td, i;
-            input = document.getElementById("myInput");
+            input = document.getElementById("globalInput");
             filter = input.value.toUpperCase();
             table = document.getElementById("myTable");
             tr = table.getElementsByTagName("tr");
@@ -42,20 +42,20 @@
     </script> 
 
     
-    <div class="container" id="logs">
+    <div class="container">
       <div class="search_container">
         <div class="prop_search">
           <form method="get">
             Host:<select name="host">
               <option value="">All</option>
               {% for host in hosts %}
-              <option value="{{host}}">{{host}}</option>
+                <option value="{{host}}">{{host}}</option>
               {% endfor %}
             </select>
             Facility:<select name="facility">
               <option value="">All</option>
               {% for facility in facilities %}
-              <option value="{{facility}}">{{facility}}</option>
+                <option value="{{facility}}">{{facility}}</option>
               {% endfor %}
             </select>   
             Time:<select name="time">
@@ -68,10 +68,10 @@
           </form>
         </div>
         <div class="global_search">
-          <input type="text" id="myInput" class="input-text-log" onkeyup="myFunction()" placeholder="Search">
+          <input type="text" id="globalInput" class="input-text-log" onkeyup="myFunction()" placeholder="Search">
         </div>
       </div>
-    
+      <div class="log_table">
             <table class="sortable">
                 <thead>
                     <tr class="header2">
@@ -100,6 +100,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+          </div>
     </div>
 
     <div class="graphs">
@@ -112,42 +113,44 @@
       <div class="card3">
         
         <h3>Incidents</h3> 
-        <table class="sortable">
-          <thead>
-              <tr class="header2">
-                  <td>Urgency</td>
-                  <td>Level</td>
-                  <td>Host</td>
-                  <td>Facility</td>
-                  <td>Message</td>
-                  <td>Description</td>
-              </tr>
-          </thead>
+          <div class="inc_table">
+           <table class="sortable">
+            <thead>
+                <tr class="header2">
+                    <td>Urgency</td>
+                    <td>Level</td>
+                    <td>Host</td>
+                    <td>Facility</td>
+                    <td>Message</td>
+                    <td>Description</td>
+                </tr>
+            </thead>
 
-          <tbody id="myTable">
-              {% for inc in incidents %}
-             
-                  <tr>
-                  {% comment %} <tr style="background-color: {% if inc.level == 'local0' %}#a1070275{% elif inc.level == 'local1' %}#610f7f49{% elif inc.level == 'local2' %}#ec9b2973{% elif inc.level == 'local3' %}#ec9b2973{% endif %}"> {% endcomment %}
-                    {% comment %} add href to full, and create asset view {% endcomment %}
-                      <td style="text-align: center; color: red;">{% if inc.level == 'emerg' %}<span>&#9888;&#9888;&#9888;&#9888;</span>{% elif inc.level == 'alert' %}&#9888;&#9888;&#9888;{% elif inc.level == 'crit' %}&#9888;&#9888;{% elif inc.level == 'err' %}&#9888;{% endif %}</td>
-                      <td>{{inc.level}}</td>
-                      <td>{{inc.host}}</td>
-                      <td>{{inc.facility}}</td>
-                      <td>{{inc.message}}</td>
-                      <td></td>
-                     
-                  </tr>
-              {% endfor %}
-          </tbody>
-      </table>
+            <tbody id="myTable">
+                {% for inc in incidents %}
+              
+                    <tr>
+                    {% comment %} <tr style="background-color: {% if inc.level == 'local0' %}#a1070275{% elif inc.level == 'local1' %}#610f7f49{% elif inc.level == 'local2' %}#ec9b2973{% elif inc.level == 'local3' %}#ec9b2973{% endif %}"> {% endcomment %}
+                      {% comment %} add href to full, and create asset view {% endcomment %}
+                        <td style="text-align: center; color: red;">{% if inc.level == 'emerg' %}<span>&#9888;&#9888;&#9888;&#9888;</span>{% elif inc.level == 'alert' %}&#9888;&#9888;&#9888;{% elif inc.level == 'crit' %}&#9888;&#9888;{% elif inc.level == 'err' %}&#9888;{% endif %}</td>
+                        <td>{{inc.level}}</td>
+                        <td>{{inc.host}}</td>
+                        <td>{{inc.facility}}</td>
+                        <td>{{inc.message}}</td>
+                        <td></td>
+                      
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
 
 
       <div class="card4"><h3>Events based on facility</h3><canvas id="doughnutChart"></canvas></div>
       <div class="card5"> 
         <h3>Last active host</h3>
-        <table class="tab sortable" style="text-align: left">
+        <table class="sortable" style="">
           <thead>
               <tr class="header2">
                   {% comment %} <td></td> {% endcomment %}

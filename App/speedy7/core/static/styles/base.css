@@ -52,15 +52,12 @@ body {
   transition: 0.3s;
 }
 
-.active {
-  background-color: #04aa6d;
-}
+/* ************************************************  */
+/* *****************CONTAINER**********************  */
+/* ************************************************  */
 
-.conatiner .search_container {
-  width: auto;
-  height: auto;
-  text-align: center;
-}
+
+
 
 .search_container .prop_search {
   float: left;
@@ -83,11 +80,12 @@ body {
   background-color: #11112c;
 }
 
-.container .search_container .global_search {
-  float: right;
-  width: 30%;
-  height: 100%;
-  margin: auto;
+.container .search_container input {
+  /* border-radius: 1rem; */
+  color: white;
+  padding: 0.7vw 0.5vw;
+  height: 1vh;
+  width: 20vh;
 }
 
 .container .search_container .prop_search .search_button {
@@ -100,32 +98,20 @@ body {
   padding: 10px;
   cursor: pointer;
 }
-
-.sortable {
-  width: 100%;
+.container .search_container .global_search {
+  float: right;
+  width: 30%;
+  height: 100%;
+  margin: auto;
 }
 
-.container .search_container input {
-  /* border-radius: 1rem; */
-  color: white;
-  padding: 0.7vw 0.5vw;
-
-  height: 1vh;
-  width: 20vh;
-}
-
-.search_container input[type="text"]:hover {
-  box-shadow: 0 0 5pt 0.5pt #000000;
-}
-
-.input-text-log {
+.container .search_container .input-text-log {
   background-color: #11112c;
   border: 1px solid #2d2d49;
   border-radius: 0.4rem;
   cursor: auto;
   margin: auto;
 }
-
 .container {
   border-radius: 0.4rem;
   font-size: 0.8rem;
@@ -133,7 +119,6 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 1.2rem auto;
   background-color: #11112c;
-  height: auto;
   width: 70vw;
 }
 
@@ -142,20 +127,52 @@ body {
   text-align: center;
 }
 
-.header2 {
-  color: #ffffff;
-  background-color: #2d2d49;
+.card5 table {
+
+  width: 100%;
+  text-align: center;
+
+}
+
+.container {
+  display: block;
 }
 
 .container table td {
   border-bottom: 1px solid #2d2d49;
 }
 
+
+.log_table thead {
+  /* display:block;
+  width: 100%; */
+}
+
+
+.log_table {
+  display:block;
+  overflow:auto;
+  height:350px;
+  width:100%;
+}
+
+
+
 td,
 tr {
   padding: 5px 5px 5px 5px; /* Increase font-size */
   border: #2d2d49;
 }
+
+.header2 {
+  color: #ffffff;
+  background-color: #2d2d49;
+}
+
+/* ************************************************  */
+/* *****************GRAPHS*************************  */
+/* ************************************************  */
+
 
 .graphs {
   border-radius: 0.4rem;
@@ -170,9 +187,9 @@ tr {
   grid-template-rows: 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    "card1 card2 card2"
-    "card1 card2 card2"
-    "card1 card2 card2";
+  "card1 card2 card2"
+  "card1 card2 card2"
+  "card1 card2 card2";
 }
 
 .graphs2 {
@@ -188,9 +205,9 @@ tr {
   grid-template-rows: 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    "card3 card4 card5 card5"
-    "card3 card4 card5 card5"
-    "card3 card4 card5 card5";
+  "card3 card4 card5 card5"
+  "card3 card4 card5 card5"
+  "card3 card4 card5 card5";
 }
 
 .card1 {
@@ -248,15 +265,27 @@ tr {
   height: auto;
 }
 
-.card3 table {
+.card3 .inc_table {
   text-align: left;
 }
 
-.card3 table td,
+.card3 .inc_table td,
 tr {
   padding: 5px 5px 5px 5px; /* Increase font-size */
   border: 1px solid #2d2d49;
 }
+
+.inc_table {
+    display:block;
+    overflow:auto;
+    height:350px;
+    width:100%;
+}
+
+/* ************************************************  */
+/* *****************LOGIN PAGE*********************  */
+/* ************************************************  */
+
 
 .login {
   /* margin-top: 50vh; */
@@ -300,4 +329,25 @@ tr {
   color: red;
   display: inline-block;
   list-style-type: none;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #131329;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1a1a30;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #1f1f38;
 }
