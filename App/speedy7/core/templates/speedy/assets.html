@@ -30,7 +30,12 @@
                         <form id="connectivity_check" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="host" value="{{name}}" /> 
-                            <td><a href="#" onclick="submitFunction()">Check if online</a></td>
+                            {% if is_online and name == host%}
+                                <td><a>{% if is_online == 2%}<span>&#128994;</span>Online{% elif is_online == 1 %} <span>&#128308;</span>Offline{% else %}Unknown{% endif %}</a></td>
+                            {% else %}
+                            <td><input type="submit" value="Check availibility"></td>
+                                {% comment %} <a href="#" onclick="submitFunction()">Check if online</a>{% endcomment %}
+                            {% endif %}
                         </form>
                     </tr>
                 

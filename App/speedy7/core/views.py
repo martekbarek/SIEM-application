@@ -113,7 +113,7 @@ def assets(request):
 
     if request.method == "POST":
         hostname = request.POST.get('host')
-        is_online = True if os.system("ping -c 1 " + hostname) == 0 else False
+        is_online = 2 if os.system("ping -c 1 " + hostname) == 0 else 1
         context = {'host':hostname,'hosts':host_info_dict, 'is_online':is_online}
         return render(request, 'speedy/assets.html',context)
      
