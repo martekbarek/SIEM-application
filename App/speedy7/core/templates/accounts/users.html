@@ -1,0 +1,55 @@
+{% extends 'speedy/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{%block title%}Users{%endblock%}
+{% block content %}
+{% include 'speedy/menu.html' %}
+
+    <div class="container">
+        <h1 style="text-align: center">Users</h1>
+        <br>
+        <br>
+        <table class="sortable">
+            <thead>
+                <tr class="header2">
+                    <td>Id</td>
+                    <td>Username</td>
+                    <td>Email</td>
+                    <td>Last Login</td>
+                    <td>Staff</td>
+                    <td>Superuser</td>
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Active</td>
+                    <td>Date Joined</td>
+                    <td></td>
+                    <td></td>
+                    {% comment %} <td></td> {% endcomment %}
+                </tr>
+            </thead>
+
+            <tbody id="myTable">
+                {% for user in users %}
+                    <tr>
+                        <td>{{user.id}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{% if user.last_login %}{{user.last_login}}{% else %}Never{% endif %}</td>
+                        <td>{% if user.is_staff %}<span>&#x2713;</span>{% else %}<span>&#x2717;</span>{% endif %}</td>
+                        <td>{% if user.is_superuser %}<span>&#x2713;</span>{% else %}<span>&#x2717;</span>{% endif %}</td>
+                        <td>{{user.first_name}}</td>
+                        <td>{{user.last_name}}</td>
+                        <td>{% if user.is_active %}<span>&#128994;</span>{% else %}<span>&#128308;</span>{% endif %}</td>
+                        <td>{{user.date_joined}}</td>
+                        <td><a href="{% url 'speedy:editUser' id=user.id %}">Edit</a></td>
+                        <td><a href="{% url 'speedy:deleteUser' id=user.id %}">Delete</a></td>
+                        {% comment %} <td><a href="">Deactive</a></td> {% endcomment %}
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    
+    </div>
+{% endblock %}

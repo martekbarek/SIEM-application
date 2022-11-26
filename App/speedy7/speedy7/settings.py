@@ -30,7 +30,7 @@ DEBUG = int(os.environ.get("DEBUG", default=1))
 
 # uncommend this
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 

@@ -1,0 +1,70 @@
+{% extends 'speedy/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{%block title%}User{%endblock%}
+{% block content %}
+{% include 'speedy/menu.html' %}
+
+    <div class="container">
+        <h1 style="text-align: center">Hello, {{user.username}}!</h1>
+        <br>
+        <br>
+       
+                    <table class="">
+
+                        <tbody id="myTable">
+                            
+                            <tr class="">
+                                <td class="header2">Id</td>
+                                <td>{{user.id}}</td>
+                            </tr>
+                            <tr class="">
+                                <td class="header2">Username</td>
+                                <td>{{user.username}}</td>
+                            </tr>
+                            <tr class="">
+                                <td class="header2">Email</td>
+                                <td>{{user.email}}</td>
+                            </tr>
+                            <tr class="">
+                                <td class="header2">First name</td>
+                                <td>{{user.first_name}}</td>
+                            </tr>
+                            <tr class="">
+                                <td class="header2">Last name</td>
+                                <td>{{user.last_name}}</td>
+                            </tr>
+                            <tr class="">
+                                <td class="header2">Date joined</td>
+                                <td>{{user.date_joined}}</td>
+                            </tr>
+                            <tr class="">
+                                <td class="header2">Is staff</td>
+                                <td>{{user.user.is_staff|yesno}}</td>
+                            </tr>
+                            <tr class="">
+                                <td class="header2">Is staff</td>
+                                <td>{{user.is_active|yesno}}</td>
+                            </tr>
+                            <tr class="">
+                                <td class="header2">Is superuser</td>
+                                <td>{{user.is_superuser|yesno}}</td>
+                            </tr>
+                            <tr class="">
+                                <td class="header2">Last login</td>
+                                <td>{% if user.last_login %}{{user.last_login}}{% else %}Never{% endif %}</td>
+                            </tr>
+
+                            
+                        </tbody>
+                    </table>
+
+                    {% comment %} <a href="{% url 'speedy:deleteUser' id=user.id %}">Delete</a>
+                    <a href="{% url 'speedy:editUser' id=user.id %}">Edit</a> {% endcomment %}
+                    
+            
+            
+    
+    </div>
+{% endblock %}

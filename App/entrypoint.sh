@@ -11,9 +11,9 @@ then
     echo "PostgreSQL started"
 fi
 
-python speedy7/manage.py flush --no-input
 python speedy7/manage.py makemigrations
 # fake migrations for already created tables
 python speedy7/manage.py migrate --fake-initial
+python speedy7/manage.py createsuperuser --no-input
 
 exec "$@"

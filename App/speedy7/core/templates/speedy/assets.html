@@ -1,0 +1,51 @@
+{% extends 'speedy/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{%block title%}Assets{%endblock%}
+{% block content %}
+{% include 'speedy/menu.html' %}
+
+    <div class="container">
+        <h1 style="text-align: center">Hosts</h1>
+        <br>
+        <br>
+        <table class="sortable">
+            <thead>
+                <tr class="header2">
+                    <td>Name</td>
+                    <td>Last Activity</td>
+                    <td>Events</td>
+                    <td></td>
+                    
+                </tr>
+            </thead>
+
+            <tbody id="myTable">
+                {% for name,info in hosts.items %}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td>{{info.0}}</td>
+                        <td>{{info.1}}</td>
+                        <form id="connectivity_check" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="host" value="{{name}}" /> 
+                            <td><a href="#" onclick="submitFunction()">Check if online</a></td>
+                        </form>
+                    </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+    
+    </div>
+
+    <script>
+
+        function submitFunction() {
+            document.getElementById("connectivity_check").submit();
+        }
+    </script>
+
+    
+{% endblock %}

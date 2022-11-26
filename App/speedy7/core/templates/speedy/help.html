@@ -1,0 +1,192 @@
+{% extends 'speedy/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{%block title%}Help{%endblock%}
+{% block content %}
+{% include 'speedy/menu.html' %}
+
+    <div class="container">
+        <h1>HELP</h1>
+    <p>This is an app to display logs fetched using syslog-ng.</p>
+
+    <table class="wikitable">
+        <h2>FACILITIES</h2>
+        <hr style="border: 1px solid #2d2d49;"></hr>
+        <tbody><tr>
+        <th>Facility code
+        </th>
+        <th>Keyword
+        </th>
+        <th>Description
+        </th></tr>
+        <tr>
+        <td>0</td>
+        <td>kern</td>
+        <td>Kernel messages
+        </td></tr>
+        <tr>
+        <td>1</td>
+        <td>user</td>
+        <td>User-level messages
+        </td></tr>
+        <tr>
+        <td>2</td>
+        <td>mail</td>
+        <td>Mail system
+        </td></tr>
+        <tr>
+        <td>3</td>
+        <td>daemon</td>
+        <td>System daemons
+        </td></tr>
+        <tr>
+        <td>4</td>
+        <td>auth</td>
+        <td>Security/authentication messages
+        </td></tr>
+        <tr>
+        <td>5</td>
+        <td>syslog</td>
+        <td>Messages generated internally by syslogd
+        </td></tr>
+        <tr>
+        <td>6</td>
+        <td>lpr</td>
+        <td>Line printer subsystem
+        </td></tr>
+        <tr>
+        <td>7</td>
+        <td>news</td>
+        <td>Network news subsystem
+        </td></tr>
+        <tr>
+        <td>8</td>
+        <td>uucp</td>
+        <td>UUCP subsystem
+        </td></tr>
+        <tr>
+        <td>9</td>
+        <td>cron</td>
+        <td>Cron subsystem
+        </td></tr>
+        <tr>
+        <td>10</td>
+        <td>authpriv</td>
+        <td>Security/authentication messages
+        </td></tr>
+        <tr>
+        <td>11</td>
+        <td>ftp</td>
+        <td>FTP daemon
+        </td></tr>
+        <tr>
+        <td>12</td>
+        <td>ntp</td>
+        <td>NTP subsystem
+        </td></tr>
+        <tr>
+        <td>13</td>
+        <td>security</td>
+        <td>Log audit
+        </td></tr>
+        <tr>
+        <td>14</td>
+        <td>console</td>
+        <td>Log alert
+        </td></tr>
+        <tr>
+        <td>15</td>
+        <td>solaris-cron</td>
+        <td>Scheduling daemon
+        </td></tr>
+        <tr>
+        <td>16–23</td>
+        <td>local0 – local7</td>
+        <td>Locally used facilities
+        </td></tr></tbody></table>
+        <hr style="border: 4px solid #2d2d49;"></hr>
+        <h2>LEVELS</h2>        
+        <hr style="border: 1px solid #2d2d49;"></hr>
+        <table>
+
+            <tbody><tr>
+            <th>Value</th>
+            <th>Severity</th>
+            <th>Keyword</th>
+            <th>Deprecated keywords</th>
+            <th>Description</th>
+            <th>Condition
+            </th></tr>
+            <tr>
+            <td>0</td>
+            <td>Emergency</td>
+            <td><code>emerg</code></td>
+            <td><code>panic</code></td>
+            <td>System is unusable</td>
+            <td>A panic condition.
+            </td></tr>
+            <tr>
+            <td>1</td>
+            <td>Alert</td>
+            <td><code>alert</code></td>
+            <td></td>
+            <td>Action must be taken immediately</td>
+            <td>A condition that should be corrected immediately, such as a corrupted system database.
+            </td></tr>
+            <tr>
+            <td>2</td>
+            <td>Critical</td>
+            <td><code>crit</code></td>
+            <td></td>
+            <td>Critical conditions</td>
+            <td>Hard device errors.
+            </td></tr>
+            <tr>
+            <td>3</td>
+            <td>Error</td>
+            <td><code>err</code></td>
+            <td><code>error</code></td>
+            <td>Error conditions</td>
+            <td>
+            </td></tr>
+            <tr>
+            <td>4</td>
+            <td>Warning</td>
+            <td><code>warning</code></td>
+            <td><code>warn</code></td>
+            <td>Warning conditions</td>
+            <td>
+            </td></tr>
+            <tr>
+            <td>5</td>
+            <td>Notice</td>
+            <td><code>notice</code></td>
+            <td></td>
+            <td>Normal but significant conditions</td>
+            <td>Conditions that are not error conditions, but that may require special handling.
+            </td></tr>
+            <tr>
+            <td>6</td>
+            <td>Informational</td>
+            <td><code>info</code></td>
+            <td></td>
+            <td>Informational messages</td>
+            <td>Confirmation that the program is working as expected.
+            </td></tr>
+            <tr>
+            <td>7</td>
+            <td>Debug</td>
+            <td><code>debug</code></td>
+            <td></td>
+            <td>Debug-level messages</td>
+            <td>Messages that contain information normally of use only when debugging a program.
+            </td></tr></tbody></table>
+            <hr style="border: 4px solid #2d2d49;"></hr>
+            <h2>SYSLOG MESSAGE SYNTAX</h2>        
+            <hr style="border: 1px solid #2d2d49;"></hr>
+            <p>${R_FULLDATE}","${FACILITY}","${LEVEL}", "${HOST}", "${PROGRAM}", "${PID}", "${MSGONLY}"</p>
+
+    </div>
+
+{% endblock %}
