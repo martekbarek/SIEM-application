@@ -3,10 +3,17 @@
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
-## App development preparations:
 
-1. Comment 32 line in App/speedy7/settings.py
-2. Activate your previously created virtual environment 
+## Deployment
+
+1. Simply run 
+```bash 
+docker-compose up --build
+ ```
+
+## Django app development preparations:
+
+1. Activate your previously created virtual environment 
 ```bash
 source venv/bin/activate
 ```
