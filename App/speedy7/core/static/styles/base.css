@@ -119,7 +119,7 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 1.2rem auto;
   background-color: #11112c;
-  width: 70vw;
+  width: 100%;
 }
 
 .container table {
