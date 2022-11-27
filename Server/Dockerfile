@@ -1,5 +1,11 @@
 FROM ubuntu
 
+# Set timezone
+RUN apt-get update && \
+    apt-get install -yq tzdata && \
+    ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
+
 # Update package manager and download required tools for troubleshooting
 RUN apt-get update && apt-get install -y sudo syslog-ng iputils-ping strace vim nmap lsof net-tools;
 

@@ -44,7 +44,7 @@
                                 <td>{{user.user.is_staff|yesno}}</td>
                             </tr>
                             <tr class="">
-                                <td class="header2">Is staff</td>
+                                <td class="header2">Is active</td>
                                 <td>{{user.is_active|yesno}}</td>
                             </tr>
                             <tr class="">
@@ -60,11 +60,5 @@
                         </tbody>
                     </table>
 
-                    {% comment %} <a href="{% url 'speedy:deleteUser' id=user.id %}">Delete</a>
-                    <a href="{% url 'speedy:editUser' id=user.id %}">Edit</a> {% endcomment %}
-                    
-            
-            
-    
     </div>
 {% endblock %}

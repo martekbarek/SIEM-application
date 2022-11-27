@@ -122,12 +122,12 @@
                     <td>Host</td>
                     <td>Facility</td>
                     <td>Message</td>
+                    <td>Timestamp</td>
                 </tr>
             </thead>
 
             <tbody id="myTable">
                 {% for inc in incidents %}
-              
                     <tr>
                     {% comment %} <tr style="background-color: {% if inc.level == 'local0' %}#a1070275{% elif inc.level == 'local1' %}#610f7f49{% elif inc.level == 'local2' %}#ec9b2973{% elif inc.level == 'local3' %}#ec9b2973{% endif %}"> {% endcomment %}
                       {% comment %} add href to full, and create asset view {% endcomment %}
@@ -136,6 +136,7 @@
                         <td>{{inc.host}}</td>
                         <td>{{inc.facility}}</td>
                         <td>{{inc.message}}</td>
+                        <td>{{inc.datetime}}</td>
                       
                     </tr>
                 {% endfor %}
@@ -147,13 +148,11 @@
 
       <div class="card4"><h3>Events based on facility</h3><canvas id="doughnutChart"></canvas></div>
       <div class="card5"> 
-        <h3>Last active host</h3>
+        <h3>Last active hosts</h3>
         <table class="sortable" style="">
           <thead>
               <tr class="header2">
-                  {% comment %} <td></td> {% endcomment %}
                   <td>Name</td>
-                  <td>IP</td>
                   <td>Last activity</td>
               </tr>
           </thead>
@@ -168,7 +167,6 @@
                             <span>&#128308;</span>
                           {% endif %}{{host}}
                       </td>
-                      <td>{{log.pid}}</td>
                       <td>{{log.datetime|timesince}} ago</td>
                   </tr>
               {% endfor %}

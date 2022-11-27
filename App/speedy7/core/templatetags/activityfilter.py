@@ -13,7 +13,6 @@ register = template.Library()
 def activityfilter(date,minutes):
     now = datetime.now()
     since = now - timedelta(minutes=minutes)
-    
     try:
         return date > since
     except Exception:
