@@ -6,10 +6,13 @@
 
 ## Deployment
 
-1. Simply run 
+1. Configure .env.example and App/.env.example files
+2. Simply run
 ```bash 
-docker-compose up --build
+docker compose --env-file .env.example up --build --remove-orphans
  ```
+
+
 
 ## Django app development preparations:
 
