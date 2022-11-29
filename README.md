@@ -14,7 +14,7 @@ docker compose --env-file .env.example up --build --remove-orphans
 
 
 
-## Django app development preparations:
+## Running django app locally:
 
 1. Activate your previously created virtual environment 
 ```bash
