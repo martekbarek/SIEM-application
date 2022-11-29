@@ -15,16 +15,6 @@ services:
     depends_on:
       - web
 
-  client:
-    build: ./Client
-    hostname: ubuntu-client
-    container_name: ubuntu-client
-    tty: true
-    networks:
-      lil-network:
-        ipv4_address: 172.23.0.2
- 
-
   db:
     restart: always
     build: ./Database
@@ -44,6 +34,8 @@ services:
 
   web:
     build: ./App
+    hostname: django-app
+    container_name: django-app
     command: python speedy7/manage.py runserver 0.0.0.0:8000
     volumes:
       - ./App/:/usr/src/App/
@@ -56,6 +48,33 @@ services:
     networks:
       lil-network:
         ipv4_address: 172.23.0.5
+
+  client:
+    build: ./Client
+    hostname: ubuntu-client
+    container_name: ubuntu-client
+    tty: true
+    networks:
+      lil-network:
+        ipv4_address: 172.23.0.6
+
+  client2:
+    build: ./Client
+    hostname: ubuntu-client2
+    container_name: ubuntu-client2
+    tty: true
+    networks:
+      lil-network:
+        ipv4_address: 172.23.0.7
+        
+  client3:
+    build: ./Client
+    hostname: ubuntu-client3
+    container_name: ubuntu-client3
+    tty: true
+    networks:
+      lil-network:
+        ipv4_address: 172.23.0.8
 
 networks:
   lil-network:
