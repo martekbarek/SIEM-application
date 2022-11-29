@@ -15,6 +15,40 @@ services:
     depends_on:
       - web
 
+  db:
+    restart: always
+    build: ./Database
+    hostname: postgres-db
+    container_name: postgres-db
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER} 
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    networks:
+      lil-network:
+        ipv4_address: 172.23.0.4
+
+  web:
+    build: ./App
+    hostname: django-app
+    container_name: django-app
+    command: python speedy7/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./App/:/usr/src/App/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./App/.env.example
+    depends_on:
+      - db
+    networks:
+      lil-network:
+        ipv4_address: 172.23.0.5
+
   client:
     build: ./Client
     hostname: ubuntu-client
@@ -22,67 +56,31 @@ services:
     tty: true
     networks:
       lil-network:
-        ipv4_address: 172.23.0.2
- 
+        ipv4_address: 172.23.0.6
 
-  db:
-    restart: always
-    build: ./Database
-    hostname: postgres-db
-    container_name: postgres-db
-    # Consider adding .env file
-    environment:
-      - POSTGRES_USER=syslog 
-      - POSTGRES_PASSWORD=syslog
-      - POSTGRES_DB=syslog
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-      # - ./Database/init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-    # ports could be just exposed to make db unaccessible from outside the container
-      - 5432:5432
-    # expose:
-    # # ports could be just exposed to make db unaccessible from outside the container
-    #   - 5432
+  client2:
+    build: ./Client
+    hostname: ubuntu-client2
+    container_name: ubuntu-client2
+    tty: true
     networks:
       lil-network:
-        ipv4_address: 172.23.0.4
-
-  web:
-    build: ./App
-    command: python speedy7/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./App/:/usr/src/App/
-      # - syslog-data-volume:/syslog-data
-    ports:
-      - 8000:8000
-    env_file:
-      - ./App/.env.dev
-    depends_on:
-      - db
+        ipv4_address: 172.23.0.7
+        
+  client3:
+    build: ./Client
+    hostname: ubuntu-client3
+    container_name: ubuntu-client3
+    tty: true
     networks:
       lil-network:
-        ipv4_address: 172.23.0.5
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   container_name: demo-pgadmin
-  #   depends_on:
-  #     - db
-  #   ports:
-  #     - "5051:80"
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
-  #     PGADMIN_DEFAULT_PASSWORD: root
-  #   restart: always
-    
+        ipv4_address: 172.23.0.8
+
 networks:
   lil-network:
     ipam:
       config:
         - subnet: 172.23.0.0/16
-
-    
-
 
 volumes:
   postgres_data:

@@ -9,11 +9,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # ensures our console output is not buffered by Docker
 ENV PYTHONUNBUFFERED 1
 
-ENV DJANGO_SUPERUSER_USERNAME admin
-ENV DJANGO_SUPERUSER_PASSWORD admin
-ENV DJANGO_SUPERUSER_EMAIL "admin@admin.com"
-
-
 RUN apk update \
     && apk add postgresql-dev gcc python3-dev musl-dev
 
