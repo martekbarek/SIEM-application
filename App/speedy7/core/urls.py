@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
 from . import views
 
@@ -18,4 +20,4 @@ urlpatterns = [
     path('user/delete/<int:id>', views.deleteUser, name='deleteUser'),
     path('user/password/change', views.changePass, name='changePass'),
     
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
