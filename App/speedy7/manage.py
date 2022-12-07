@@ -7,6 +7,9 @@ import sys
 def main():
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "speedy7.settings")
+    os.environ.setdefault("DJANGO_ALLOWED_HOSTS", "*")
+    os.environ.setdefault("SECRET_KEY", "secret")
+            
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
