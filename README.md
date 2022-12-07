@@ -20,6 +20,12 @@ docker compose --env-file .env.example up --build --remove-orphans
 ```bash
 source venv/bin/activate
 ```
+2. Comment 13,14,15 lines in speedy7/core/models.py
+
+3. run 
+```bash
+py App\speedy7\manage.py runserver
+```
 
 ## Helpful commands:
 
