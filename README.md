@@ -3,11 +3,12 @@
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
+**Speedy7** is a simple SIEM like web application which aggregates syslog data from client machines. It allows filtering logs and displays them in a variety of ways. All the components are deployed in containers.
 
-## Deployment
+## How to run
 
-1. Configure .env.example and App/.env.example files
-2. Simply run
+**1. Configure .env.example and App/.env.example files**
+**2. Run command**
 ```bash 
 docker compose --env-file .env.example up --build --remove-orphans
  ```
@@ -16,13 +17,13 @@ docker compose --env-file .env.example up --build --remove-orphans
 
 ## Running django app locally:
 
-1. Activate your previously created virtual environment 
+**1. Activate your previously created virtual environment** 
 ```bash
 source venv/bin/activate
 ```
-2. Comment 13,14,15 lines in speedy7/core/models.py
+**2. Comment 13,14,15 lines in speedy7/core/models.py**
 
-3. run 
+**3. Run** 
 ```bash
 py App\speedy7\manage.py runserver
 ```
