@@ -32,9 +32,9 @@ docker compose --env-file .env.example up --build --remove-orphans
  ```
 
 
-## Running locally:
+## Run locally:
 
-**1. Create and activate virtula environment** 
+**1. Create and activate virtulal environment** 
 
 ```bash
 python -m venv venv
