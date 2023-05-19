@@ -4,7 +4,7 @@
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 # Speedy7 
-is a simple SIEM web application which aggregates **syslog** data from client machines. It allows filtering logs and displaying them in a variety of ways. All the components are deployed in containers.
+is a simple Security information and event management (SIEM) web application which aggregates **syslog** data from client machines. It allows filtering logs and displaying them in a variety of ways. All the components are deployed in containers.
 
 **Main dashboard consist of 6 cards:**
 ![Capture-2023-04-16-114059](https://user-images.githubusercontent.com/73181855/232290457-47fb8b30-c854-458a-8ac7-0ed03d71535a.png)
